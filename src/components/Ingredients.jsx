@@ -9,10 +9,12 @@ function Ingredients({ ingredients, setIngredients }) {
     setIngredients([e.target.value]);
   };
 
+
   return (
     <>
     <input 
       onChange={handleChange}
+      value={ingredients || ""}
       type="text"
     />
     {/* <ol>

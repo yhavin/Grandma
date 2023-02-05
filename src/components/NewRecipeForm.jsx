@@ -21,6 +21,7 @@ function NewRecipeForm() {
     e.preventDefault();
     addDoc(collectionId, {recipe, ingredients});
     setRecipe("");
+    setIngredients([]);
   };
 
   return (

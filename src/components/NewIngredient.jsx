@@ -1,6 +1,6 @@
 import React from "react";
 
-function NewIngredient({ newIngredient, handleChange, handleSubmit}) {
+function NewIngredient({ newIngredient, handleChange, handleSubmit }) {
   return (
     <form onSubmit={handleSubmit}>
       <input
@@ -10,7 +10,7 @@ function NewIngredient({ newIngredient, handleChange, handleSubmit}) {
         onChange={handleChange}
       />
       {!newIngredient.name ? null : <button type="submit">Add Ingredient</button>}
-    </form> 
+    </form>
   )
 }
 

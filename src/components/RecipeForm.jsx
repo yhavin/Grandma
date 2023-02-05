@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import NewIngredient from "./NewIngredient"
 import AllIngredients from "./AllIngredients";
 import { db } from "../firebase.config.js"
@@ -29,6 +29,13 @@ function RecipeForm() {
     nextId++;
   }
 
+  const newIngredientInput = useRef(null);
+
+  const handleEdit = (ingredientIdToEdit) => {
+    setNewIngredient(allIngredients[ingredientIdToEdit]);
+    handleDelete(ingredientIdToEdit);
+  }
+
   const handleDelete = (ingredientIdToRemove) => {
     setAllIngredients(prev => prev.filter(ingredient => ingredient.id !== ingredientIdToRemove));
   }
@@ -54,7 +61,7 @@ function RecipeForm() {
   // };
 
   return (
-    <div className="NewRecipeForm">
+    <div className="RecipeForm">
       <h2>New Recipe</h2>
         <label>Ingredients
         </label>
@@ -63,7 +70,11 @@ function RecipeForm() {
           handleChange={handleChange}
           handleSubmit={handleSubmit}
         />
-        <AllIngredients allIngredients={allIngredients} handleDelete={handleDelete} />
+        <AllIngredients 
+          allIngredients={allIngredients} 
+          handleEdit={handleEdit} 
+          handleDelete={handleDelete}
+        />
         <button type="upload" onClick={handleUpload}>Add Recipe</button>
     </div>
   )

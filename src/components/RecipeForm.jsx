@@ -21,12 +21,15 @@ const RecipeForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(allIngredients)
+
+    // Prevent submission of empty ingredient
     if (!newIngredient.name) return;
+
+    // Prevent submission of duplicate ingredient
     if (allIngredients.some(ingredient => ingredient.name === newIngredient.name)) {
       alert("Ingredient already added.")
       setNewIngredient({});
-    } else {
+    } else { // If ingredient is not duplicate
       setAllIngredients(prev => [...prev, newIngredient]);
       setNewIngredient({});
     }

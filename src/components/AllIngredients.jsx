@@ -2,15 +2,15 @@ import React from "react";
 
 const AllIngredients = ({ allIngredients, handleEdit, handleDelete }) => {
   return (
-    <ol>
-      {allIngredients.map(({ name, id }, index) => (
-        <li key={index}>
+    <ul>
+      {allIngredients.map(({ name, id }) => (
+        <li key={id}>
             <p>{name}</p>
             <button onClick={() => handleEdit(id)}>Edit</button>
-            <button onClick={() => handleDelete(id)}>X</button>
+            <button onClick={() => handleDelete(id)}>Delete</button>
         </li>
       ))}
-    </ol>
+    </ul>
   )
 }
 

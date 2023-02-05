@@ -32,9 +32,8 @@ const RecipeForm = () => {
   const newIngredientInput = useRef(null);
 
   const handleEdit = (ingredientIdToEdit) => {
-    setNewIngredient(allIngredients[ingredientIdToEdit]);
+    setNewIngredient(allIngredients.find(ingredient => ingredient.id === ingredientIdToEdit));
     handleDelete(ingredientIdToEdit);
-    newIngredientInput.current.focus();
   }
 
   const handleDelete = (ingredientIdToRemove) => {

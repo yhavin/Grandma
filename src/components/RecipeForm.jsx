@@ -5,8 +5,6 @@ import { db } from "../firebase.config.js"
 import { collection, addDoc } from "firebase/firestore";
 import { v4 as uuidv4 } from "uuid";
 
-let nextId = 0;
-
 const RecipeForm = () => {
   const [newIngredient, setNewIngredient] = useState({});
 
@@ -23,10 +21,15 @@ const RecipeForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(allIngredients)
     if (!newIngredient.name) return;
-    setAllIngredients(prev => [...prev, newIngredient]);
-    console.log(allIngredients);
-    setNewIngredient({});
+    if (allIngredients.some(ingredient => ingredient.name === newIngredient.name)) {
+      alert("Ingredient already added.")
+      setNewIngredient({});
+    } else {
+      setAllIngredients(prev => [...prev, newIngredient]);
+      setNewIngredient({});
+    }
   }
 
   const newIngredientInput = useRef(null);
@@ -51,7 +54,6 @@ const RecipeForm = () => {
     addDoc(collectionId, {allIngredients});
     alert("Recipe added.")
     setAllIngredients([]);
-    nextId = 0;
   }
 
   return (

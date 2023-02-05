@@ -1,11 +1,11 @@
 import React from "react";
-import NewRecipeForm from "../components/NewRecipeForm";
+import RecipeForm from "../components/RecipeForm";
 
 function Home() {
   return (
     <div>
       <h1>This is the home page</h1>
-      <NewRecipeForm />
+      <RecipeForm />
     </div>
   )
 };

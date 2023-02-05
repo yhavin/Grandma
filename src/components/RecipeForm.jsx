@@ -43,6 +43,7 @@ function RecipeForm() {
     addDoc(collectionId, {allIngredients});
     alert("Recipe added.")
     setAllIngredients([]);
+    nextId = 0;
   }
 
   // const handleSubmit = (e) => {

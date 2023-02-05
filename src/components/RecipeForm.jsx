@@ -6,7 +6,7 @@ import { collection, addDoc } from "firebase/firestore";
 
 let nextId = 0;
 
-function RecipeForm() {
+const RecipeForm = () => {
   const [newIngredient, setNewIngredient] = useState({});
 
   const handleChange = ({ target }) => {
@@ -34,6 +34,7 @@ function RecipeForm() {
   const handleEdit = (ingredientIdToEdit) => {
     setNewIngredient(allIngredients[ingredientIdToEdit]);
     handleDelete(ingredientIdToEdit);
+    newIngredientInput.current.focus();
   }
 
   const handleDelete = (ingredientIdToRemove) => {
@@ -69,6 +70,7 @@ function RecipeForm() {
           newIngredient={newIngredient}
           handleChange={handleChange}
           handleSubmit={handleSubmit}
+          ref={newIngredientInput}
         />
         <AllIngredients 
           allIngredients={allIngredients} 

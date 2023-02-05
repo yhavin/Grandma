@@ -1,6 +1,6 @@
 import React from "react";
 
-function AllIngredients({ allIngredients, handleEdit, handleDelete }) {
+const AllIngredients = ({ allIngredients, handleEdit, handleDelete }) => {
   return (
     <ol>
       {allIngredients.map(({ name, id }, index) => (

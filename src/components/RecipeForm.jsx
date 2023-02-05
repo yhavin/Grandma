@@ -39,6 +39,7 @@ const RecipeForm = () => {
 
   const handleDelete = (ingredientIdToRemove) => {
     setAllIngredients(prev => prev.filter(ingredient => ingredient.id !== ingredientIdToRemove));
+    newIngredientInput.current.focus();
   }
 
   const collectionId = collection(db, "recipes");

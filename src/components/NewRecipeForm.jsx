@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import Ingredients from "./Ingredients";
 import { db } from "../firebase.config.js"
 import { collection, addDoc } from "firebase/firestore";
 
 function NewRecipeForm() {
   const [recipe, setRecipe] = useState("");
+  const [ingredients, setIngredients] = useState([]);
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -17,8 +19,7 @@ function NewRecipeForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    addDoc(collectionId, recipe);
-    alert("Recipe added.");
+    addDoc(collectionId, {recipe, ingredients});
     setRecipe("");
   };
 
@@ -35,17 +36,14 @@ function NewRecipeForm() {
           />
         </label>
         <label>Ingredients
-          <input
-            type="text"
-            name="ingredients"
-            value={recipe.ingredients || ""}
-            onChange={handleChange}
-          />
+          <Ingredients 
+            ingredients={ingredients} 
+            setIngredients={setIngredients} />
         </label>
         <input type="submit" />
       </form>
     </div>
   )
-}
+};
 
 export default NewRecipeForm;

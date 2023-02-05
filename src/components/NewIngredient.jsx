@@ -3,6 +3,7 @@ import React, { forwardRef } from "react";
 const NewIngredient = forwardRef(({ newIngredient, handleChange, handleSubmit }, ref) => {
   return (
     <form onSubmit={handleSubmit}>
+      <h3>Ingredients</h3>
       <input
         ref={ref}
         name="name"

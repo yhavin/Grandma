@@ -3,6 +3,7 @@ import NewIngredient from "./NewIngredient"
 import AllIngredients from "./AllIngredients";
 import { db } from "../firebase.config.js"
 import { collection, addDoc } from "firebase/firestore";
+import { v4 as uuidv4 } from "uuid";
 
 let nextId = 0;
 
@@ -11,12 +12,12 @@ const RecipeForm = () => {
 
   const handleChange = ({ target }) => {
     const { name, value } = target;
-    setNewIngredient(prev => ({
-      ...prev,
-      id: nextId,
-      [name]: value
-    }));
-  }
+      setNewIngredient(prev => ({
+        ...prev,
+        id: uuidv4(),
+        [name]: value
+      }));
+    }
 
   const [allIngredients, setAllIngredients] = useState([]);
 
@@ -26,7 +27,6 @@ const RecipeForm = () => {
     setAllIngredients(prev => [...prev, newIngredient]);
     console.log(allIngredients);
     setNewIngredient({});
-    nextId++;
   }
 
   const newIngredientInput = useRef(null);
@@ -54,18 +54,9 @@ const RecipeForm = () => {
     nextId = 0;
   }
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   addDoc(collectionId, { recipe, ingredients });
-  //   setRecipe({});
-  //   setIngredients([]);
-  // };
-
   return (
     <div className="RecipeForm">
       <h2>New Recipe</h2>
-        <label>Ingredients
-        </label>
         <NewIngredient 
           newIngredient={newIngredient}
           handleChange={handleChange}

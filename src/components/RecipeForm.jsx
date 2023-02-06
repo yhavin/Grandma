@@ -14,11 +14,10 @@ const RecipeForm = () => {
 
   const handleIngredientChange = ({ target }) => {
     const { name, value } = target;
-      setNewIngredient(prev => ({
-        ...prev,
+      setNewIngredient({
         id: uuidv4(),
         [name]: value
-      }));
+      });
     }
 
   const [allIngredients, setAllIngredients] = useState([]);
@@ -58,11 +57,10 @@ const RecipeForm = () => {
 
   const handleStepChange = ({ target }) => {
     const { name, value } = target;
-      setNewStep(prev => ({
-        ...prev,
-        id: uuidv4(),
-        [name]: value
-      }));
+      setNewStep({
+        [name]: value,
+        id: uuidv4()
+      });
     }
 
   const [allSteps, setAllSteps] = useState([]);
@@ -77,8 +75,10 @@ const RecipeForm = () => {
     if (allSteps.some(step => step.description === newStep.description)) {
       alert("Step already added.")
       setNewStep({});
+
     // If step is not duplicate
     } else {
+      console.log('CREATING', newStep)
       setAllSteps(prev => [...prev, newStep]);
       setNewStep({});
       newStepInput.current.focus();
@@ -89,7 +89,7 @@ const RecipeForm = () => {
 
   const handleStepEdit = (stepIdToEdit) => {
     setNewStep(allSteps.find(step => step.id === stepIdToEdit));
-    handleStepDelete(stepIdToEdit);
+    // handleSt/epDelete(stepIdToEdit);
   }
 
   const handleStepDelete = (stepIdToRemove) => {
@@ -105,9 +105,10 @@ const RecipeForm = () => {
       alert("Please add ingredients.")
       return;
     }
-    addDoc(collectionId, {allIngredients});
+    addDoc(collectionId, {allIngredients, allSteps});
     alert("Recipe added.")
     setAllIngredients([]);
+    setAllSteps([]);
   }
 
   return (

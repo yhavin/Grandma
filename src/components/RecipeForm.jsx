@@ -1,14 +1,18 @@
 import React, { useState, useRef } from "react";
 import NewIngredient from "./NewIngredient"
 import AllIngredients from "./AllIngredients";
+import NewStep from "./NewStep";
+import AllSteps from "./AllSteps";
 import { db } from "../firebase.config.js"
 import { collection, addDoc } from "firebase/firestore";
 import { v4 as uuidv4 } from "uuid";
 
 const RecipeForm = () => {
+  
+  // Ingredients state setup
   const [newIngredient, setNewIngredient] = useState({});
 
-  const handleChange = ({ target }) => {
+  const handleIngredientChange = ({ target }) => {
     const { name, value } = target;
       setNewIngredient(prev => ({
         ...prev,
@@ -19,7 +23,7 @@ const RecipeForm = () => {
 
   const [allIngredients, setAllIngredients] = useState([]);
 
-  const handleSubmit = (e) => {
+  const handleIngredientSubmit = (e) => {
     e.preventDefault();
 
     // Prevent submission of empty ingredient
@@ -29,26 +33,73 @@ const RecipeForm = () => {
     if (allIngredients.some(ingredient => ingredient.name === newIngredient.name)) {
       alert("Ingredient already added.")
       setNewIngredient({});
-    } else { // If ingredient is not duplicate
+    // If ingredient is not duplicate
+    } else { 
       setAllIngredients(prev => [...prev, newIngredient]);
       setNewIngredient({});
+      newIngredientInput.current.focus();
     }
   }
 
   const newIngredientInput = useRef(null);
 
-  const handleEdit = (ingredientIdToEdit) => {
+  const handleIngredientEdit = (ingredientIdToEdit) => {
     setNewIngredient(allIngredients.find(ingredient => ingredient.id === ingredientIdToEdit));
-    handleDelete(ingredientIdToEdit);
+    handleIngredientDelete(ingredientIdToEdit);
   }
 
-  const handleDelete = (ingredientIdToRemove) => {
+  const handleIngredientDelete = (ingredientIdToRemove) => {
     setAllIngredients(prev => prev.filter(ingredient => ingredient.id !== ingredientIdToRemove));
     newIngredientInput.current.focus();
   }
 
+  // Steps state setup
+  const [newStep, setNewStep] = useState({});
+
+  const handleStepChange = ({ target }) => {
+    const { name, value } = target;
+      setNewStep(prev => ({
+        ...prev,
+        id: uuidv4(),
+        [name]: value
+      }));
+    }
+
+  const [allSteps, setAllSteps] = useState([]);
+
+  const handleStepSubmit = (e) => {
+    e.preventDefault();
+
+    // Prevent submission of empty step
+    if (!newStep.description) return;
+
+    // Prevent submission of duplicate step
+    if (allSteps.some(step => step.description === newStep.description)) {
+      alert("Step already added.")
+      setNewStep({});
+    // If step is not duplicate
+    } else {
+      setAllSteps(prev => [...prev, newStep]);
+      setNewStep({});
+      newStepInput.current.focus();
+    }
+  }
+
+  const newStepInput = useRef(null);
+
+  const handleStepEdit = (stepIdToEdit) => {
+    setNewStep(allSteps.find(step => step.id === stepIdToEdit));
+    handleStepDelete(stepIdToEdit);
+  }
+
+  const handleStepDelete = (stepIdToRemove) => {
+    setAllSteps(prev => prev.filter(step => step.id !== stepIdToRemove));
+    newStepInput.current.focus();
+  }
+
   const collectionId = collection(db, "recipes");
 
+  // TODO: UPDATE FOR STEPS AS WELL
   const handleUpload = () => {
     if (allIngredients.length === 0) {
       alert("Please add ingredients.")
@@ -64,14 +115,25 @@ const RecipeForm = () => {
       <h2>New Recipe</h2>
         <NewIngredient 
           newIngredient={newIngredient}
-          handleChange={handleChange}
-          handleSubmit={handleSubmit}
+          handleIngredientChange={handleIngredientChange}
+          handleIngredientSubmit={handleIngredientSubmit}
           ref={newIngredientInput}
         />
         <AllIngredients 
           allIngredients={allIngredients} 
-          handleEdit={handleEdit} 
-          handleDelete={handleDelete}
+          handleIngredientEdit={handleIngredientEdit} 
+          handleIngredientDelete={handleIngredientDelete}
+        />
+        <NewStep
+          newStep={newStep}
+          handleStepChange={handleStepChange}
+          handleStepSubmit={handleStepSubmit}
+          ref={newStepInput}
+        />
+        <AllSteps
+          allSteps={allSteps}
+          handleStepEdit={handleStepEdit}
+          handleStepDelete={handleStepDelete}
         />
         <button type="upload" onClick={handleUpload}>Add Recipe</button>
     </div>

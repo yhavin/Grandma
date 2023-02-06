@@ -1,13 +1,13 @@
 import React from "react";
 
-const AllIngredients = ({ allIngredients, handleEdit, handleDelete }) => {
+const AllIngredients = ({ allIngredients, handleIngredientEdit, handleIngredientDelete }) => {
   return (
     <ul>
       {allIngredients.map(({ name, id }) => (
         <li key={id}>
             <p>{name}</p>
-            <button onClick={() => handleEdit(id)}>Edit</button>
-            <button onClick={() => handleDelete(id)}>Delete</button>
+            <button onClick={() => handleIngredientEdit(id)}>Edit</button>
+            <button onClick={() => handleIngredientDelete(id)}>Delete</button>
         </li>
       ))}
     </ul>

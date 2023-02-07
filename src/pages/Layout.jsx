@@ -6,12 +6,8 @@ function Layout() {
     <div>
       <nav>
         <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/recipes">Recipes</Link>
-          </li>
+          <li><Link to="/">Home</Link></li>
+          <li><Link to="/recipes">Recipes</Link></li>
         </ul>
       </nav>
 

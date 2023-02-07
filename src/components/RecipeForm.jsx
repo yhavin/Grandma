@@ -7,18 +7,20 @@ import { db } from "../firebase.config.js"
 import { collection, addDoc } from "firebase/firestore";
 import { v4 as uuidv4 } from "uuid";
 
+// Libraries to look into: Formik, React-Hook-Form
+
 const RecipeForm = () => {
-  
+
   // Ingredients state setup
   const [newIngredient, setNewIngredient] = useState({});
 
   const handleIngredientChange = ({ target }) => {
     const { name, value } = target;
-      setNewIngredient({
-        id: uuidv4(),
-        [name]: value
-      });
-    }
+    setNewIngredient({
+      id: uuidv4(),
+      [name]: value
+    });
+  }
 
   const [allIngredients, setAllIngredients] = useState([]);
 
@@ -32,8 +34,8 @@ const RecipeForm = () => {
     if (allIngredients.some(ingredient => ingredient.name === newIngredient.name)) {
       alert("Ingredient already added.")
       setNewIngredient({});
-    // If ingredient is not duplicate
-    } else { 
+      // If ingredient is not duplicate
+    } else {
       setAllIngredients(prev => [...prev, newIngredient]);
       setNewIngredient({});
       newIngredientInput.current.focus();
@@ -57,11 +59,11 @@ const RecipeForm = () => {
 
   const handleStepChange = ({ target }) => {
     const { name, value } = target;
-      setNewStep({
-        [name]: value,
-        id: uuidv4()
-      });
-    }
+    setNewStep({
+      [name]: value,
+      id: uuidv4()
+    });
+  }
 
   const [allSteps, setAllSteps] = useState([]);
 
@@ -76,7 +78,7 @@ const RecipeForm = () => {
       alert("Step already added.")
       setNewStep({});
 
-    // If step is not duplicate
+      // If step is not duplicate
     } else {
       console.log('CREATING', newStep)
       setAllSteps(prev => [...prev, newStep]);
@@ -105,7 +107,7 @@ const RecipeForm = () => {
       alert("Please add ingredients.")
       return;
     }
-    addDoc(collectionId, {allIngredients, allSteps});
+    addDoc(collectionId, { allIngredients, allSteps });
     alert("Recipe added.")
     setAllIngredients([]);
     setAllSteps([]);
@@ -114,29 +116,29 @@ const RecipeForm = () => {
   return (
     <div className="RecipeForm">
       <h2>New Recipe</h2>
-        <NewIngredient 
-          newIngredient={newIngredient}
-          handleIngredientChange={handleIngredientChange}
-          handleIngredientSubmit={handleIngredientSubmit}
-          ref={newIngredientInput}
-        />
-        <AllIngredients 
-          allIngredients={allIngredients} 
-          handleIngredientEdit={handleIngredientEdit} 
-          handleIngredientDelete={handleIngredientDelete}
-        />
-        <NewStep
-          newStep={newStep}
-          handleStepChange={handleStepChange}
-          handleStepSubmit={handleStepSubmit}
-          ref={newStepInput}
-        />
-        <AllSteps
-          allSteps={allSteps}
-          handleStepEdit={handleStepEdit}
-          handleStepDelete={handleStepDelete}
-        />
-        <button type="upload" onClick={handleUpload}>Add Recipe</button>
+      <NewIngredient
+        newIngredient={newIngredient}
+        handleIngredientChange={handleIngredientChange}
+        handleIngredientSubmit={handleIngredientSubmit}
+        ref={newIngredientInput}
+      />
+      <AllIngredients
+        allIngredients={allIngredients}
+        handleIngredientEdit={handleIngredientEdit}
+        handleIngredientDelete={handleIngredientDelete}
+      />
+      <NewStep
+        newStep={newStep}
+        handleStepChange={handleStepChange}
+        handleStepSubmit={handleStepSubmit}
+        ref={newStepInput}
+      />
+      <AllSteps
+        allSteps={allSteps}
+        handleStepEdit={handleStepEdit}
+        handleStepDelete={handleStepDelete}
+      />
+      <button type="upload" onClick={handleUpload}>Add Recipe</button>
     </div>
   )
 };

@@ -24,21 +24,21 @@ const NewRecipe = () => {
 
   const {
     fields: ingredientFields,
-    append: ingredientAppend,
-    remove: ingredientRemove,
-    move: ingredientMove,
+    append,
+    remove,
+    move
   } = useFieldArray({ control, name: "ingredients" });
 
   const watchIngredients = watch().ingredients;
 
   const numIngredients = watchIngredients.filter(ingredient => ingredient.name !== "").length;
 
-  const handleMoveUp = index => {
-    index === 0 ? ingredientMove(index, watchIngredients.length - 1) : ingredientMove(index, index - 1)
+  const handleMoveUp = (index, length, array) => {
+    index === 0 ? move(index, length - 1) : move(index, index - 1)
   }
 
-  const handleMoveDown = index => {
-    index === (watchIngredients.length - 1) ? ingredientMove(index, 0) : ingredientMove(index, index + 1)
+  const handleMoveDown = (index, length, array) => {
+    index === (length - 1) ? move(index, 0) : move(index, index + 1)
   }
 
   const cleanSubmission = data => {
@@ -73,13 +73,13 @@ const NewRecipe = () => {
           {ingredientFields.map((ingredient, index) => (
             <li key={ingredient.id}>
               <input {...register(`ingredients[${index}].name`)} type="search" placeholder="Ingredient" />
-              <button type="button" disabled={watchIngredients.length === 1} onClick={() => handleMoveUp(index)}>&uarr;</button>
-              <button type="button" disabled={watchIngredients.length === 1} onClick={() => handleMoveDown(index)}>&darr;</button>
-              <button type="button" disabled={watchIngredients.length === 1} onClick={() => ingredientRemove(index)}>Delete</button>
+              <button type="button" disabled={watchIngredients.length === 1} onClick={() => handleMoveUp(index, watchIngredients.length)}>&uarr;</button>
+              <button type="button" disabled={watchIngredients.length === 1} onClick={() => handleMoveDown(index, watchIngredients.length)}>&darr;</button>
+              <button type="button" disabled={watchIngredients.length === 1} onClick={() => remove(index, watchIngredients.length)}>Delete</button>
             </li>
           ))}
-          <button type="button" onClick={() => ingredientAppend({ name: "" })}>Add</button>
-          <button type="button" disabled={watchIngredients.length === 1} onClick={() => { ingredientRemove(); ingredientAppend({ name: "" }) }}>Clear</button>
+          <button type="button" onClick={() => append({ name: "" })}>Add</button>
+          <button type="button" disabled={watchIngredients.length === 1} onClick={() => { remove(); append({ name: "" }) }}>Clear</button>
         </ul>
         <input type="submit" />
         <p>{submitCount > 0 && "isSubmitSuccessful: " + isSubmitSuccessful}</p>

@@ -81,7 +81,7 @@ const NewRecipe = () => {
     <div>
       <h2>New recipe</h2>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <label>Title</label>
+      <label>Title</label>
         <input {...register("title", { required: true })} type="search" placeholder="Title" />
         <label>Meal type</label>
         <select {...register("mealType")}>

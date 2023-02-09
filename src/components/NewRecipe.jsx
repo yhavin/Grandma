@@ -8,7 +8,8 @@ const NewRecipe = () => {
   const defaultRecipe = {
     title: "",
     mealType: "",
-    ingredients: [{ name: "" }]
+    ingredients: [{ name: "" }],
+    steps: [{ description: "" }]
   }
 
   const { register, watch, handleSubmit, control, reset, formState: { submitCount, isSubmitSuccessful } } = useForm({
@@ -24,26 +25,46 @@ const NewRecipe = () => {
 
   const {
     fields: ingredientFields,
-    append,
-    remove,
-    move
+    append: ingredientAppend,
+    remove: ingredientRemove,
+    move: ingredientMove
   } = useFieldArray({ control, name: "ingredients" });
+
+  const {
+    fields: stepFields,
+    append: stepAppend,
+    remove: stepRemove,
+    move: stepMove
+  } = useFieldArray({ control, name: "steps" });
 
   const watchIngredients = watch().ingredients;
 
   const numIngredients = watchIngredients.filter(ingredient => ingredient.name !== "").length;
 
-  const handleMoveUp = (index, length, array) => {
-    index === 0 ? move(index, length - 1) : move(index, index - 1)
+  const watchSteps = watch().steps;
+
+  const numSteps = watchSteps.filter(step => step.description !== "").length;
+
+  const handleIngredientMoveUp = (index, length) => {
+    index === 0 ? ingredientMove(index, length - 1) : ingredientMove(index, index - 1)
   }
 
-  const handleMoveDown = (index, length, array) => {
-    index === (length - 1) ? move(index, 0) : move(index, index + 1)
+  const handleIngredientMoveDown = (index, length) => {
+    index === (length - 1) ? ingredientMove(index, 0) : ingredientMove(index, index + 1)
+  }
+
+  const handleStepMoveUp = (index, length) => {
+    index === 0 ? stepMove(index, length - 1) : stepMove(index, index - 1)
+  }
+
+  const handleStepMoveDown = (index, length) => {
+    index === (length - 1) ? stepMove(index, 0) : stepMove(index, index + 1)
   }
 
   const cleanSubmission = data => {
     const cleanedIngredients = data.ingredients.filter(ingredient => ingredient.name !== "");
-    const cleanedData = {...data, ingredients: cleanedIngredients};
+    const cleanedSteps = data.steps.filter(step => step.description !== "");
+    const cleanedData = {...data, ingredients: cleanedIngredients, steps: cleanedSteps};
     return cleanedData;
   }
 
@@ -73,14 +94,27 @@ const NewRecipe = () => {
           {ingredientFields.map((ingredient, index) => (
             <li key={ingredient.id}>
               <input {...register(`ingredients[${index}].name`)} type="search" placeholder="Ingredient" />
-              <button type="button" disabled={watchIngredients.length === 1} onClick={() => handleMoveUp(index, watchIngredients.length)}>&uarr;</button>
-              <button type="button" disabled={watchIngredients.length === 1} onClick={() => handleMoveDown(index, watchIngredients.length)}>&darr;</button>
-              <button type="button" disabled={watchIngredients.length === 1} onClick={() => remove(index, watchIngredients.length)}>Delete</button>
+              <button type="button" disabled={watchIngredients.length === 1} onClick={() => handleIngredientMoveUp(index, watchIngredients.length)}>&uarr;</button>
+              <button type="button" disabled={watchIngredients.length === 1} onClick={() => handleIngredientMoveDown(index, watchIngredients.length)}>&darr;</button>
+              <button type="button" disabled={watchIngredients.length === 1} onClick={() => ingredientRemove(index, watchIngredients.length)}>Delete</button>
             </li>
           ))}
-          <button type="button" onClick={() => append({ name: "" })}>Add</button>
-          <button type="button" disabled={watchIngredients.length === 1} onClick={() => { remove(); append({ name: "" }) }}>Clear</button>
+          <button type="button" onClick={() => ingredientAppend({ name: "" })}>Add</button>
+          <button type="button" disabled={watchIngredients.length === 1} onClick={() => { ingredientRemove(); ingredientAppend({ name: "" }) }}>Clear</button>
         </ul>
+        <ol>
+          <label>{numSteps} Step{numSteps !== 1 && "s"}</label>
+          {stepFields.map((step, index) => (
+            <li key={step.id}>
+              <input {...register(`steps[${index}].description`)} type="search" placeholder="Step" />
+              <button type="button" disabled={watchSteps.length === 1} onClick={() => handleStepMoveUp(index, watchSteps.length)}>&uarr;</button>
+              <button type="button" disabled={watchSteps.length === 1} onClick={() => handleStepMoveDown(index, watchSteps.length)}>&darr;</button>
+              <button type="button" disabled={watchSteps.length === 1} onClick={() => stepRemove(index, watchSteps.length)}>Delete</button>
+            </li>
+          ))}
+          <button type="button" onClick={() => stepAppend({ description: "" })}>Add</button>
+          <button type="button" disabled={watchSteps.length === 1} onClick={() => { stepRemove(); stepAppend({ description: "" }) }}>Clear</button>
+        </ol>
         <input type="submit" />
         <p>{submitCount > 0 && "isSubmitSuccessful: " + isSubmitSuccessful}</p>
       </form>

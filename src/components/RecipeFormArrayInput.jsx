@@ -15,6 +15,7 @@ const RecipeFormArrayInput = ({ name, control, label, childProp }) => {
         {fields.map((item, index) => (
           <div key={item.id}>
             <Controller
+              defaultValue={""}
               name={`${name}[${index}].${childProp}`}
               control={control}
               render={({ field: { onChange, value } }) => (
@@ -24,13 +25,14 @@ const RecipeFormArrayInput = ({ name, control, label, childProp }) => {
                   value={value} />
               )}
             />
-            <ButtonGroup variant="contained" color="secondary" size="large">
+            <ButtonGroup variant="outlined" color="secondary" size="large">
               <Button>&uarr;</Button>
               <Button>&darr;</Button>
               <Button onClick={() => remove(index)}>Delete</Button>
             </ButtonGroup>
           </div>
         ))}
+        <Button variant="outlined" onClick={() => append()}>Add</Button>
     </div>
   );
 };

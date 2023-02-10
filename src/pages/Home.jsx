@@ -1,5 +1,6 @@
 import React from "react";
-import RecipeForm from "../components/RecipeForm";
+// import NewRecipe from "../components/NewRecipe";
+import { RecipeForm } from "../components/RecipeForm";
 
 function Home() {
   return (

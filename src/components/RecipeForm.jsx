@@ -41,7 +41,7 @@ export const RecipeForm = () => {
       <Typography variant="h5">New recipe</Typography>
       <RecipeFormTextInput name="title" control={control} label="Title" />
       <RecipeFormDropdownInput name="mealType" control={control} label="Meal type" />
-      <RecipeFormArrayInput name="ingredients" control={control} register={register} />
+      <RecipeFormArrayInput name="ingredients" control={control} label="Ingredients" childProp="name"/>
       {/* <RecipeFormArrayInput name="steps" control={control} label="Steps" /> */}
       <Button type="submit" variant="contained" color="primary" size="large">Submit</Button>
     </Paper>

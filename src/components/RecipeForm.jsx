@@ -17,7 +17,7 @@ const defaultRecipe = {
 export const RecipeForm = () => {
 
   const methods = useForm({ defaultValues: defaultRecipe });
-  const { handleSubmit, reset, control } = methods;
+  const { handleSubmit, reset, control }  = methods;
 
   const cleanSubmission = data => {
     const cleanedIngredients = data.ingredients.filter(ingredient => ingredient.name !== "");

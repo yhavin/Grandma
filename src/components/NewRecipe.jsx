@@ -72,7 +72,7 @@ const NewRecipe = () => {
 
   const onSubmit = data => {
     data = cleanSubmission(data);
-    // addDoc(collectionId, data);
+    addDoc(collectionId, data);
     console.log(JSON.stringify(data, false, 2));
     reset(defaultRecipe);
   }

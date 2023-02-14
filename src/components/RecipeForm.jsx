@@ -5,7 +5,6 @@ import { collection, addDoc } from "firebase/firestore";
 import RecipeFormTextInput from "./RecipeFormTextInput.jsx";
 import RecipeFormSelectInput from "./RecipeFormSelectInput.jsx";
 import RecipeFormArrayInput from "./RecipeFormArrayInput.jsx";
-// import theme from "../App";
 import { Button } from "@material-ui/core";
 import { Alert, Dialog, DialogActions, DialogContent, DialogTitle, Stack } from '@mui/material/';
 
@@ -45,7 +44,7 @@ export const RecipeForm = () => {
   
   const onSubmit = data => {
     data = cleanSubmission(data);
-    // addDoc(collectionId, data);
+    addDoc(collectionId, data);
     console.log(JSON.stringify(data, false, 2));
     reset(defaultRecipe);
     submitSuccess = true;

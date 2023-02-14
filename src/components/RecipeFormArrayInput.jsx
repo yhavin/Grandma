@@ -1,38 +1,62 @@
 import React from "react";
 import { Controller, useFieldArray } from "react-hook-form";
-import TextField from "@material-ui/core/TextField";
-import { Typography } from "@material-ui/core";
-import ButtonGroup from '@mui/material/ButtonGroup';
-import Button from '@mui/material/Button';
+import theme from "../App";
+import { TextField, Typography } from "@material-ui/core";
+import { ButtonGroup, Button, Stack } from '@mui/material';
+import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
+import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
+import DeleteIcon from '@mui/icons-material/Delete';
+import AddIcon from '@mui/icons-material/Add';
 
-const RecipeFormArrayInput = ({ name, control, label, childProp }) => {
+const RecipeFormArrayInput = ({ name, control, label, childProp, watch }) => {
 
   const { fields, append, remove, move } = useFieldArray({ control, name: name });
 
+  const handleMoveDown = (index, length) => {
+    index === (length - 1) ? move(index, 0) : move(index, index + 1);
+  };
+
+  const handleMoveUp = (index, length) => {
+    index === 0 ? move(index, length - 1) : move(index, index - 1);
+  };
+
   return (
     <div>
-      <Typography variant="h6">{label}</Typography>
-        {fields.map((item, index) => (
-          <div key={item.id}>
-            <Controller
-              defaultValue={""}
-              name={`${name}[${index}].${childProp}`}
-              control={control}
-              render={({ field: { onChange, value } }) => (
+      <Typography variant="subtitle1">{label}</Typography>
+      {fields.map((item, index) => (
+        <div key={item.id}>
+          <Controller
+            defaultValue={""}
+            name={`${name}[${index}].${childProp}`}
+            control={control}
+            render={({ field: { onChange, value } }) => (
                 <TextField
                   variant="outlined"
                   onChange={onChange}
-                  value={value} />
-              )}
-            />
-            <ButtonGroup variant="outlined" color="secondary" size="large">
-              <Button>&uarr;</Button>
-              <Button>&darr;</Button>
-              <Button onClick={() => remove(index)}>Delete</Button>
-            </ButtonGroup>
-          </div>
-        ))}
-        <Button variant="outlined" onClick={() => append()}>Add</Button>
+                  value={value}
+                  size="small"
+                  style={{ width: "68%" }}
+                />
+            )}
+          />
+          <ButtonGroup variant="outlined" size="normal" color="primary">
+            <Button disabled={fields.length === 1} onClick={() => handleMoveUp(index, fields.length)}>
+              <ArrowUpwardIcon />
+            </Button>
+            <Button disabled={fields.length === 1} onClick={() => handleMoveDown(index, fields.length)}>
+              <ArrowDownwardIcon />
+            </Button>
+            <Button disabled={fields.length === 1} onClick={() => remove(index)}>
+              <DeleteIcon />
+            </Button>
+          </ButtonGroup>
+        </div>
+      ))}
+      <ButtonGroup variant="outlined" size="normal" color="secondary">
+        <Button onClick={() => append()}>
+          <AddIcon />
+        </Button>
+      </ButtonGroup>
     </div>
   );
 };

@@ -1,6 +1,6 @@
 import React from "react";
 import { Controller } from "react-hook-form";
-import TextField from "@material-ui/core/TextField";
+import { TextField, Typography } from "@material-ui/core";
 
 const RecipeFormTextInput = ({ name, control, label }) => {
 
@@ -8,14 +8,21 @@ const RecipeFormTextInput = ({ name, control, label }) => {
     <Controller
       name={name}
       control={control}
+      // rules={{required: true}}
       render={({ field: { onChange, value } }) => (
-        <TextField 
-          label={label}
-          variant="outlined"
-          onChange={onChange} 
-          value={value} />
-        )
-      }
+        <div>
+          <Typography variant="subtitle1">{label}</Typography>
+          <TextField 
+            // label={label}
+            autoFocus
+            fullWidth
+            variant="outlined"
+            onChange={onChange} 
+            value={value}
+            size="small"
+          />
+        </div>
+      )}
     />
   );
 };

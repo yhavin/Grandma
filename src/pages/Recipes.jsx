@@ -1,6 +1,6 @@
 import React from "react";
 
-function Recipes() {
+const Recipes = () => {
   return (
     <div>
       <h1>This is a list of all recipes</h1>

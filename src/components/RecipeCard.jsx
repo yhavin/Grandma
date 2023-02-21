@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { Card, CardActionArea, CardContent, DialogContent, List, ListItem, ListItemText, IconButton } from "@mui/material";
-import { Dialog, DialogTitle, DialogActions, Typography } from "@material-ui/core";
+import { Button, Dialog, DialogTitle, DialogActions, Typography } from "@material-ui/core";
 import CloseIcon from '@mui/icons-material/Close';
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 
 const RecipeCard = ({ title, mealType, ingredients, steps, date }) => {
   
@@ -59,7 +60,7 @@ const RecipeCard = ({ title, mealType, ingredients, steps, date }) => {
             ))}
           </List>
           <Typography variant="button">Steps</Typography>
-          <List sx={{ listStyleType: "number", pl: 4 }}>
+          <List sx={{ listStyleType: "decimal", pl: 4 }}>
             {steps.map((item, index) => (
               <ListItem sx={{ display: "list-item" }} key={index}>
                 <ListItemText>{item.description}</ListItemText>
@@ -68,11 +69,9 @@ const RecipeCard = ({ title, mealType, ingredients, steps, date }) => {
           </List>
         </DialogContent>
         <DialogActions style={{ justifyContent: "space-between" }}>
+          <Button startIcon={<DeleteOutlineIcon />}>Delete</Button>
           <Typography variant="subtitle1" color="textSecondary">
             {"Added: " + date.toDate().toLocaleString("en-US", { year: "numeric", month: "long", day: "numeric" })}
-          </Typography>
-          <Typography variant="button" color="textSecondary">
-            {capitaliseWord(mealType)}
           </Typography>
         </DialogActions>
       </Dialog>

@@ -75,3 +75,5 @@ export const RecipeForm = () => {
   );
 
 };
+
+export default RecipeForm;

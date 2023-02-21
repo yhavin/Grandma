@@ -1,8 +1,7 @@
 import React from "react";
 import { Controller, useFieldArray } from "react-hook-form";
-import theme from "../App";
 import { TextField, Typography } from "@material-ui/core";
-import { ButtonGroup, Button, Stack } from '@mui/material';
+import { ButtonGroup, Button } from '@mui/material';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import DeleteIcon from '@mui/icons-material/Delete';

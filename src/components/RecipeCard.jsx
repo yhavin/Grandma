@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Card, CardActionArea, CardContent, DialogContent, List, ListItem, ListItemText, IconButton } from "@mui/material";
-import { Dialog, DialogTitle, Typography } from "@material-ui/core";
+import { Dialog, DialogTitle, DialogActions, Typography } from "@material-ui/core";
 import CloseIcon from '@mui/icons-material/Close';
 
 const RecipeCard = ({ title, mealType, ingredients, steps, date }) => {
@@ -25,9 +25,6 @@ const RecipeCard = ({ title, mealType, ingredients, steps, date }) => {
         <CardActionArea onClick={handleClickOpen}>
           <CardContent>
             <Typography variant="h5">{title}</Typography>
-            {/* <Typography variant="subtitle1" color="textSecondary">
-              {date.toDate().toLocaleString("en-US", { year: "numeric", month: "long", day: "numeric" })}
-            </Typography> */}
             <Typography variant="subtitle1" color="textSecondary">{capitaliseWord(mealType)}</Typography>
             <br />
             <Typography variant="body2">
@@ -53,7 +50,7 @@ const RecipeCard = ({ title, mealType, ingredients, steps, date }) => {
           ) : null}
           </DialogTitle>
         <DialogContent dividers>
-          <Typography variant="subtitle1">Ingredients</Typography>
+          <Typography variant="button">Ingredients</Typography>
           <List sx={{ listStyleType: "disc", pl: 4 }}>
             {ingredients.map((item, index) => (
               <ListItem sx={{ display: "list-item" }} key={index}>
@@ -61,7 +58,7 @@ const RecipeCard = ({ title, mealType, ingredients, steps, date }) => {
               </ListItem>
             ))}
           </List>
-          <Typography variant="subtitle1">Steps</Typography>
+          <Typography variant="button">Steps</Typography>
           <List sx={{ listStyleType: "number", pl: 4 }}>
             {steps.map((item, index) => (
               <ListItem sx={{ display: "list-item" }} key={index}>
@@ -70,6 +67,14 @@ const RecipeCard = ({ title, mealType, ingredients, steps, date }) => {
             ))}
           </List>
         </DialogContent>
+        <DialogActions style={{ justifyContent: "space-between" }}>
+          <Typography variant="subtitle1" color="textSecondary">
+            {"Added: " + date.toDate().toLocaleString("en-US", { year: "numeric", month: "long", day: "numeric" })}
+          </Typography>
+          <Typography variant="button" color="textSecondary">
+            {capitaliseWord(mealType)}
+          </Typography>
+        </DialogActions>
       </Dialog>
     </div>
   );

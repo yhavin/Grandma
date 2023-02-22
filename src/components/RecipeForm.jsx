@@ -15,10 +15,9 @@ const defaultRecipe = {
   steps: [{ "description": "" }]
 };
 
-let submitSuccess = false;
-
 export const RecipeForm = () => {
 
+  const [submitSuccess, setSubmitSuccess] = useState(false);
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
@@ -46,10 +45,10 @@ export const RecipeForm = () => {
   const onSubmit = data => {
     data = cleanSubmission(data);
     addDoc(collectionId, data);
-    console.log(JSON.stringify(data, false, 2));
+    // console.log(JSON.stringify(data, false, 2));
     reset(defaultRecipe);
-    submitSuccess = true;
-    setTimeout(() => {handleClose(); submitSuccess = false}, 1500);
+    setSubmitSuccess(true);
+    setTimeout(() => {handleClose(); setSubmitSuccess(false)}, 1500);
   };
 
   return (
@@ -65,10 +64,10 @@ export const RecipeForm = () => {
             <RecipeFormArrayInput name="steps" control={control} label="Steps" childProp="description" watch={watch} />
           </Stack>
         </DialogContent>
-          <DialogActions>
+          {!submitSuccess && <DialogActions>
             <Button type="button" variant="outlined" onClick={handleClose}>Cancel</Button>
             <Button type="submit" color="primary" variant="contained" onClick={handleSubmit(onSubmit)}>Submit</Button>
-          </DialogActions>
+          </DialogActions>}
           {submitSuccess && <Alert severity="success">Recipe added successfully.</Alert>}
       </Dialog>
     </div>

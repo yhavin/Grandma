@@ -8,8 +8,7 @@ import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 
 const RecipeCard = ({ title, mealType, ingredients, steps, date, id, collection }) => {
 
-  let deleteSuccess = false;
-  
+  const [deleteSuccess, setDeleteSuccess] = useState(false);
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
@@ -21,13 +20,11 @@ const RecipeCard = ({ title, mealType, ingredients, steps, date, id, collection 
   };
 
   const handleDelete = (id) => {
-    console.log("Deleting " + id);
-    deleteSuccess = true;
-    console.log(deleteSuccess);
+    setDeleteSuccess(true);
     setTimeout(() => {
       deleteDoc(doc(db, collection, id)); 
       handleClose(); 
-      deleteSuccess = false;
+      setDeleteSuccess(false);
     }, 1500);
   }
 
@@ -83,12 +80,12 @@ const RecipeCard = ({ title, mealType, ingredients, steps, date, id, collection 
             ))}
           </List>
         </DialogContent>
-        <DialogActions style={{ justifyContent: "space-between" }}>
+        {!deleteSuccess && <DialogActions style={{ justifyContent: "space-between" }}>
           <Button variant="outlined" startIcon={<DeleteOutlineIcon />} onClick={() => handleDelete(id)}>Delete</Button>
           <Typography variant="subtitle1" color="textSecondary">
             {"Added: " + date.toDate().toLocaleString("en-US", { year: "numeric", month: "long", day: "numeric" })}
           </Typography>
-        </DialogActions>
+        </DialogActions>}
         {deleteSuccess && <Alert severity="error">Recipe deleted successfully.</Alert>}
       </Dialog>
     </div>

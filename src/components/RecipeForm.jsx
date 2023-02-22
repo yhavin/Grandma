@@ -20,7 +20,7 @@ export const RecipeForm = () => {
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [open, setOpen] = useState(false);
 
-  const handleClickOpen = () => {
+  const handleOpen = () => {
     setOpen(true);
   };
 
@@ -56,7 +56,7 @@ export const RecipeForm = () => {
 
   return (
     <div>
-      <Button variant="outlined" onClick={handleClickOpen}>Add new recipe</Button>
+      <Button variant="outlined" onClick={handleOpen}>Add new recipe</Button>
       <Dialog open={open} onClose={handleClose} fullWidth>
         <DialogTitle>New recipe</DialogTitle>
         <DialogContent dividers>
@@ -75,7 +75,6 @@ export const RecipeForm = () => {
       </Dialog>
     </div>
   );
-
 };
 
 export default RecipeForm;

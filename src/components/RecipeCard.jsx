@@ -5,6 +5,7 @@ import { Alert, Card, CardActionArea, CardContent, DialogContent, DialogContentT
 import { Button, Dialog, DialogTitle, DialogActions, Typography } from "@material-ui/core";
 import CloseIcon from '@mui/icons-material/Close';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import EditIcon from '@mui/icons-material/Edit';
 
 const RecipeCard = ({ title, mealType, ingredients, steps, date, id, collection }) => {
 
@@ -90,13 +91,14 @@ const RecipeCard = ({ title, mealType, ingredients, steps, date, id, collection 
               </ListItem>
             ))}
           </List>
-        </DialogContent>
-        {<DialogActions style={{ justifyContent: "space-between" }}>
-          <Button variant="outlined" style={{ color: "#d32f2f", borderColor: "#d32f2f" }} startIcon={<DeleteOutlineIcon />} onClick={() => setConfirmOpen(true)}>Delete</Button>
           <Typography variant="subtitle1" color="textSecondary">
             {"Added: " + date.toDate().toLocaleString("en-US", { year: "numeric", month: "long", day: "numeric" })}
           </Typography>
-        </DialogActions>}
+        </DialogContent>
+        <DialogActions style={{ justifyContent: "end" }}>
+          <Button variant="outlined" style={{ color: "grey", borderColor: "grey" }} startIcon={<EditIcon />}>Edit</Button>
+          <Button variant="outlined" style={{ color: "#d32f2f", borderColor: "#d32f2f" }} startIcon={<DeleteOutlineIcon />} onClick={() => setConfirmOpen(true)}>Delete</Button>
+        </DialogActions>
       </Dialog>
 
       <Dialog open={confirmOpen} onClose={handleConfirmOpen}>

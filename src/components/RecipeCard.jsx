@@ -108,8 +108,8 @@ const RecipeCard = ({ title, mealType, ingredients, steps, date, id, collection 
           </DialogContentText>
         </DialogContent>
         {!deleteSuccess && <DialogActions>
-          <Button onClick={handleConfirmClose}>Cancel</Button>
-          <Button style={{ color: "#d32f2f" }} onClick={() => handleRecipeDelete(id)}>Confirm</Button>
+          <Button variant="outlined" onClick={handleConfirmClose}>Cancel</Button>
+          <Button variant="outlined" style={{ color: "#d32f2f" }} onClick={() => handleRecipeDelete(id)}>Confirm</Button>
         </DialogActions>}
         {deleteSuccess && <Alert severity="success">Recipe deleted.</Alert>}
       </Dialog>

@@ -48,7 +48,10 @@ export const RecipeForm = () => {
     // console.log(JSON.stringify(data, false, 2));
     reset(defaultRecipe);
     setSubmitSuccess(true);
-    setTimeout(() => {handleClose(); setSubmitSuccess(false)}, 1500);
+    setTimeout(() => {
+      handleClose(); 
+      setSubmitSuccess(false)
+    }, 1200);
   };
 
   return (
@@ -68,7 +71,7 @@ export const RecipeForm = () => {
             <Button type="button" variant="outlined" onClick={handleClose}>Cancel</Button>
             <Button type="submit" color="primary" variant="contained" onClick={handleSubmit(onSubmit)}>Submit</Button>
           </DialogActions>}
-          {submitSuccess && <Alert severity="success">Recipe added successfully.</Alert>}
+          {submitSuccess && <Alert severity="success">Recipe added.</Alert>}
       </Dialog>
     </div>
   );

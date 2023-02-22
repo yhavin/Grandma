@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { db } from "../firebase.config.js";
 import { doc, deleteDoc } from "firebase/firestore";
-import { Alert, Card, CardActionArea, CardContent, DialogContent, List, ListItem, ListItemText, IconButton } from "@mui/material";
+import { Alert, Card, CardActionArea, CardContent, DialogContent, DialogContentText, List, ListItem, ListItemText, IconButton } from "@mui/material";
 import { Button, Dialog, DialogTitle, DialogActions, Typography } from "@material-ui/core";
 import CloseIcon from '@mui/icons-material/Close';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
@@ -9,23 +9,34 @@ import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 const RecipeCard = ({ title, mealType, ingredients, steps, date, id, collection }) => {
 
   const [deleteSuccess, setDeleteSuccess] = useState(false);
-  const [open, setOpen] = useState(false);
+  const [recipeOpen, setRecipeOpen] = useState(false);
 
-  const handleClickOpen = () => {
-    setOpen(true);
+  const handleRecipeOpen = () => {
+    setRecipeOpen(true);
   };
 
-  const handleClose = () => {
-    setOpen(false);
+  const handleRecipeClose = () => {
+    setRecipeOpen(false);
   };
 
-  const handleDelete = (id) => {
+  const [confirmOpen, setConfirmOpen] = useState(false);
+
+  const handleConfirmOpen = () => {
+    setConfirmOpen(true);
+  };
+
+  const handleConfirmClose = () => {
+    setConfirmOpen(false);
+  };
+
+  const handleRecipeDelete = (id) => {
     setDeleteSuccess(true);
     setTimeout(() => {
       deleteDoc(doc(db, collection, id)); 
-      handleClose(); 
+      handleConfirmClose();
+      handleRecipeClose(); 
       setDeleteSuccess(false);
-    }, 1500);
+    }, 1200);
   }
 
   const capitaliseWord = (string) => {
@@ -35,7 +46,7 @@ const RecipeCard = ({ title, mealType, ingredients, steps, date, id, collection 
   return (
     <div>
       <Card>
-        <CardActionArea onClick={handleClickOpen}>
+        <CardActionArea onClick={handleRecipeOpen}>
           <CardContent>
             <Typography variant="h5">{title}</Typography>
             <Typography variant="subtitle1" color="textSecondary">{capitaliseWord(mealType)}</Typography>
@@ -50,12 +61,12 @@ const RecipeCard = ({ title, mealType, ingredients, steps, date, id, collection 
         </CardActionArea>
       </Card>
 
-      <Dialog open={open} onClose={handleClose} fullWidth>
+      <Dialog open={recipeOpen} onClose={handleRecipeClose} fullWidth>
         <DialogTitle>
           {title}
-          {open ? (
+          {recipeOpen ? (
             <IconButton
-              onClick={handleClose}
+              onClick={handleRecipeClose}
               sx={{ position: 'absolute', right: 8, top: 8, color: (theme) => theme.palette.grey[500] }}
             >
               <CloseIcon />
@@ -80,13 +91,27 @@ const RecipeCard = ({ title, mealType, ingredients, steps, date, id, collection 
             ))}
           </List>
         </DialogContent>
-        {!deleteSuccess && <DialogActions style={{ justifyContent: "space-between" }}>
-          <Button variant="outlined" startIcon={<DeleteOutlineIcon />} onClick={() => handleDelete(id)}>Delete</Button>
+        {<DialogActions style={{ justifyContent: "space-between" }}>
+          <Button variant="outlined" style={{ color: "#d32f2f", borderColor: "#d32f2f" }} startIcon={<DeleteOutlineIcon />} onClick={() => setConfirmOpen(true)}>Delete</Button>
           <Typography variant="subtitle1" color="textSecondary">
             {"Added: " + date.toDate().toLocaleString("en-US", { year: "numeric", month: "long", day: "numeric" })}
           </Typography>
         </DialogActions>}
-        {deleteSuccess && <Alert severity="error">Recipe deleted successfully.</Alert>}
+      </Dialog>
+
+      <Dialog open={confirmOpen} onClose={handleConfirmOpen}>
+        <DialogTitle>Delete recipe?</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Are you sure you want to delete this recipe?
+            This action cannot be undone.
+          </DialogContentText>
+        </DialogContent>
+        {!deleteSuccess && <DialogActions>
+          <Button onClick={handleConfirmClose}>Cancel</Button>
+          <Button style={{ color: "#d32f2f" }} onClick={() => handleRecipeDelete(id)}>Confirm</Button>
+        </DialogActions>}
+        {deleteSuccess && <Alert severity="success">Recipe deleted.</Alert>}
       </Dialog>
     </div>
   );

@@ -28,13 +28,14 @@ const RecipeFormArrayInput = ({ name, control, label, childProp }) => {
             defaultValue={""}
             name={`${name}[${index}].${childProp}`}
             control={control}
-            render={({ field: { onChange, value } }) => (
+            render={({ field: { ref, onChange, value } }) => (
                 <TextField
                   variant="outlined"
                   onChange={onChange}
                   value={value}
                   size="small"
                   style={{ width: "68%" }}
+                  inputRef={ref}
                 />
             )}
           />
@@ -52,7 +53,7 @@ const RecipeFormArrayInput = ({ name, control, label, childProp }) => {
         </div>
       ))}
       <ButtonGroup variant="outlined" size="normal" color="secondary">
-        <Button onClick={() => append()}>
+        <Button onClick={() => append({}, { shouldFocus: true, focusName: `${name}[${fields.length}].${childProp}` })}>
           <AddIcon />
         </Button>
       </ButtonGroup>

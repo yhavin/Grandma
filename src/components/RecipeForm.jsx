@@ -11,8 +11,8 @@ import { Alert, Dialog, DialogActions, DialogContent, DialogTitle, Stack } from 
 const defaultRecipe = {
   title: "",
   mealType: "",
-  ingredients: [{ name: "" }],
-  steps: [{ description: "" }]
+  ingredients: [{ "name": "" }],
+  steps: [{ "description": "" }]
 };
 
 let submitSuccess = false;

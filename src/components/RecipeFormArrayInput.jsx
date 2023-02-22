@@ -7,7 +7,7 @@ import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddIcon from '@mui/icons-material/Add';
 
-const RecipeFormArrayInput = ({ name, control, label, childProp, watch }) => {
+const RecipeFormArrayInput = ({ name, control, label, childProp }) => {
 
   const { fields, append, remove, move } = useFieldArray({ control, name: name });
 

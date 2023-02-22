@@ -1,10 +1,14 @@
 import React, { useState } from "react";
-import { Card, CardActionArea, CardContent, DialogContent, List, ListItem, ListItemText, IconButton } from "@mui/material";
+import { db } from "../firebase.config.js";
+import { doc, deleteDoc } from "firebase/firestore";
+import { Alert, Card, CardActionArea, CardContent, DialogContent, List, ListItem, ListItemText, IconButton } from "@mui/material";
 import { Button, Dialog, DialogTitle, DialogActions, Typography } from "@material-ui/core";
 import CloseIcon from '@mui/icons-material/Close';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 
-const RecipeCard = ({ title, mealType, ingredients, steps, date }) => {
+const RecipeCard = ({ title, mealType, ingredients, steps, date, id, collection }) => {
+
+  let deleteSuccess = false;
   
   const [open, setOpen] = useState(false);
 
@@ -15,6 +19,17 @@ const RecipeCard = ({ title, mealType, ingredients, steps, date }) => {
   const handleClose = () => {
     setOpen(false);
   };
+
+  const handleDelete = (id) => {
+    console.log("Deleting " + id);
+    deleteSuccess = true;
+    console.log(deleteSuccess);
+    setTimeout(() => {
+      deleteDoc(doc(db, collection, id)); 
+      handleClose(); 
+      deleteSuccess = false;
+    }, 1500);
+  }
 
   const capitaliseWord = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
@@ -69,11 +84,12 @@ const RecipeCard = ({ title, mealType, ingredients, steps, date }) => {
           </List>
         </DialogContent>
         <DialogActions style={{ justifyContent: "space-between" }}>
-          <Button startIcon={<DeleteOutlineIcon />}>Delete</Button>
+          <Button variant="outlined" startIcon={<DeleteOutlineIcon />} onClick={() => handleDelete(id)}>Delete</Button>
           <Typography variant="subtitle1" color="textSecondary">
             {"Added: " + date.toDate().toLocaleString("en-US", { year: "numeric", month: "long", day: "numeric" })}
           </Typography>
         </DialogActions>
+        {deleteSuccess && <Alert severity="error">Recipe deleted successfully.</Alert>}
       </Dialog>
     </div>
   );

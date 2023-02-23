@@ -5,7 +5,6 @@ import { ButtonGroup, Button } from '@mui/material';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import DeleteIcon from '@mui/icons-material/Delete';
-import AddIcon from '@mui/icons-material/Add';
 
 const RecipeFormArrayInput = ({ name, control, label, childProp }) => {
 

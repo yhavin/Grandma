@@ -12,7 +12,8 @@ const defaultRecipe = {
   title: "",
   mealType: "",
   ingredients: [{ "name": "" }],
-  steps: [{ "description": "" }]
+  steps: [{ "description": "" }],
+  liked: false
 };
 
 export const RecipeForm = () => {

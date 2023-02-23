@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import { db } from "../firebase.config.js";
-import { doc, deleteDoc } from "firebase/firestore";
-import { Alert, Card, CardActionArea, CardContent, DialogContent, DialogContentText, List, ListItem, ListItemText, IconButton } from "@mui/material";
+import { doc, deleteDoc, updateDoc } from "firebase/firestore";
+import { Alert, Card, CardActionArea, CardContent, CardActions, DialogContent, DialogContentText, List, ListItem, ListItemText, IconButton, Grid } from "@mui/material";
 import { Button, Dialog, DialogTitle, DialogActions, Typography } from "@material-ui/core";
 import CloseIcon from '@mui/icons-material/Close';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import EditIcon from '@mui/icons-material/Edit';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import ShareIcon from '@mui/icons-material/Share';
 
-const RecipeCard = ({ title, mealType, ingredients, steps, date, id, collection }) => {
+const RecipeCard = ({ title, mealType, ingredients, steps, date, liked, id, collection }) => {
 
   const [deleteSuccess, setDeleteSuccess] = useState(false);
   const [recipeOpen, setRecipeOpen] = useState(false);
@@ -28,6 +30,13 @@ const RecipeCard = ({ title, mealType, ingredients, steps, date, id, collection 
 
   const handleConfirmClose = () => {
     setConfirmOpen(false);
+  };
+
+  const handleLike = (id, liked) => {
+    updateDoc(doc(db, collection, id), {
+      liked: !liked
+    });
+    console.log("Updated: " + id + " toggled like: " + !liked);
   };
 
   const handleRecipeDelete = (id) => {
@@ -60,6 +69,10 @@ const RecipeCard = ({ title, mealType, ingredients, steps, date, id, collection 
             </Typography>
           </CardContent>
         </CardActionArea>
+        <CardActions>
+          <IconButton size="small" color={liked ? "error" : ""} onClick={() => handleLike(id, liked)}><FavoriteIcon /></IconButton>
+          <IconButton size="small"><ShareIcon /></IconButton>
+        </CardActions>
       </Card>
 
       <Dialog open={recipeOpen} onClose={handleRecipeClose} fullWidth>
@@ -95,7 +108,9 @@ const RecipeCard = ({ title, mealType, ingredients, steps, date, id, collection 
             {"Added: " + date.toDate().toLocaleString("en-US", { year: "numeric", month: "long", day: "numeric" })}
           </Typography>
         </DialogContent>
-        <DialogActions style={{ justifyContent: "end" }}>
+        <DialogActions>
+          <IconButton size="small" color={liked ? "error" : ""} onClick={() => handleLike(id, liked)}><FavoriteIcon /></IconButton>
+          <IconButton size="small"><ShareIcon /></IconButton>
           <Button variant="outlined" style={{ color: "grey", borderColor: "grey" }} startIcon={<EditIcon />}>Edit</Button>
           <Button variant="outlined" style={{ color: "#d32f2f", borderColor: "#d32f2f" }} startIcon={<DeleteOutlineIcon />} onClick={() => setConfirmOpen(true)}>Delete</Button>
         </DialogActions>

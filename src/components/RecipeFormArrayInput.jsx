@@ -19,6 +19,12 @@ const RecipeFormArrayInput = ({ name, control, label, childProp }) => {
     index === 0 ? move(index, length - 1) : move(index, index - 1);
   };
 
+  const handleAppend = (e) => {
+    if (e.key === "Enter") {
+      append({}, { shouldFocus: true, focusName: `${name}[${fields.length}].${childProp}` })
+    } else { return } ;
+  };
+
   return (
     <div>
       <Typography variant="subtitle1">{label}</Typography>
@@ -36,10 +42,11 @@ const RecipeFormArrayInput = ({ name, control, label, childProp }) => {
                   size="small"
                   style={{ width: "68%" }}
                   inputRef={ref}
+                  onKeyDown={(e) =>handleAppend(e)}
                 />
             )}
           />
-          <ButtonGroup variant="outlined" size="normal" color="primary">
+          <ButtonGroup variant="text" size="normal" color="primary">
             <Button disabled={fields.length === 1} onClick={() => handleMoveUp(index, fields.length)}>
               <ArrowUpwardIcon />
             </Button>
@@ -52,11 +59,6 @@ const RecipeFormArrayInput = ({ name, control, label, childProp }) => {
           </ButtonGroup>
         </div>
       ))}
-      <ButtonGroup variant="outlined" size="normal" color="secondary">
-        <Button onClick={() => append({}, { shouldFocus: true, focusName: `${name}[${fields.length}].${childProp}` })}>
-          <AddIcon />
-        </Button>
-      </ButtonGroup>
     </div>
   );
 };

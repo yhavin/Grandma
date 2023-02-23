@@ -8,8 +8,9 @@ import Grid from '@mui/material/Unstable_Grid2';
 
 const Recipes = () => {
 
-  const collectionName = "recipes"
+  const collectionName = "recipes";
   const collectionId = collection(db, collectionName);
+
   const [recipes, setRecipes] = useState([]);
 
   useEffect(() => {
@@ -28,13 +29,14 @@ const Recipes = () => {
       <RecipeForm />
       <Grid container spacing={3}>
         {recipes.map((recipe, index) => (
-          <Grid item key={index} xs={5} md={1.5}>
+          <Grid item key={index} xs={5} md={2.5}>
             <RecipeCard
               title={recipe.title}
               mealType={recipe.mealType}
               ingredients={recipe.ingredients}
               steps={recipe.steps}
               date={recipe.date}
+              liked={recipe.liked}
               id={recipe.id}
               collection={collectionName}
             />

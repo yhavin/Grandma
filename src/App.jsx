@@ -2,8 +2,10 @@ import React from "react";
 import './App.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./pages/Layout";
-import Home from "./pages/Home";
 import Recipes from "./pages/Recipes";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import Reset from "./pages/Reset";
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 export const theme = createTheme({
@@ -27,8 +29,10 @@ const App = () => {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Layout />} >
-            <Route index element={<Home />} />
+            <Route index element={<Login />} />
             <Route path="recipes" element={<Recipes />} />
+            <Route path="register" element={<Register />} />
+            <Route path="reset" element={<Reset />} />
           </Route>
         </Routes>
       </BrowserRouter>

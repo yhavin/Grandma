@@ -4,7 +4,7 @@ import { db } from "../firebase.config.js";
 import { collection, onSnapshot } from "firebase/firestore";
 import RecipeCard from "../components/RecipeCard.jsx";
 import Grid from '@mui/material/Unstable_Grid2';
-
+import { Paper } from '@mui/material';
 
 const Recipes = () => {
 
@@ -24,12 +24,19 @@ const Recipes = () => {
     })
   }, []);
 
+  recipes.sort((a, b) => {
+    console.log("first check", +b.liked - +a.liked)
+    console.log("second check", b.date.seconds - a.date.seconds)
+
+    return +b.liked - +a.liked || b.date.seconds - a.date.seconds;
+  })
+
   return (
-    <div>
+    <Paper style={{ padding: 20 }}>
       <RecipeForm />
-      <Grid container spacing={3}>
+      <Grid container spacing={3} justifyContent="flex-start" alignItems="flex-start">
         {recipes.map((recipe, index) => (
-          <Grid item key={index} xs={5} md={2.5}>
+          <Grid item key={index} xs={12} md={3}>
             <RecipeCard
               title={recipe.title}
               mealType={recipe.mealType}
@@ -43,7 +50,7 @@ const Recipes = () => {
           </Grid>
         ))}
       </Grid>
-    </div>
+    </Paper>
   );
 };
 

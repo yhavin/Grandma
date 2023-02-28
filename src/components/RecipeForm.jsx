@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { db, auth } from "../firebase.config.js";
+import { db } from "../firebase.config.js";
 import { collection, addDoc } from "firebase/firestore";
 import RecipeFormTextInput from "./RecipeFormTextInput.jsx";
 import RecipeFormSelectInput from "./RecipeFormSelectInput.jsx";
 import RecipeFormArrayInput from "./RecipeFormArrayInput.jsx";
 import { Button } from "@material-ui/core";
 import { Alert, Dialog, DialogActions, DialogContent, DialogTitle, Stack } from '@mui/material/';
-import { onAuthStateChanged } from "firebase/auth";
 
 const defaultRecipe = {
   title: "",
@@ -18,13 +17,7 @@ const defaultRecipe = {
   uid: ""
 };
 
-export const RecipeForm = () => {
-
-  const user = auth.currentUser;
-  let uid;
-  if (user) {
-    uid = user.uid;
-  }
+export const RecipeForm = ({ uid }) => {
 
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [open, setOpen] = useState(false);

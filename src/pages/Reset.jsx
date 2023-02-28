@@ -7,7 +7,7 @@ import { Stack } from '@mui/material/';
 
 const Reset = ()  => {
   const [email, setEmail] = useState("");
-  const [user, loading, error] = useAuthState(auth);
+  const [user, loading] = useAuthState(auth);
   const navigate = useNavigate();
 
   useEffect(() => {

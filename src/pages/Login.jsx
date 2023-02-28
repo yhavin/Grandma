@@ -27,12 +27,12 @@ const Login = () => {
             placeholder="Email"
           />
           <TextField 
-            type="text"
+            type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Password"
           />
-          <Button onClick={() => loginWithEmailAndPassword(email, password)}>Login</Button>
+          <Button type="submit" onClick={() => loginWithEmailAndPassword(email, password)}>Login</Button>
         </Stack>
       </div>
       <div>

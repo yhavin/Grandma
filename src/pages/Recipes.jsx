@@ -6,25 +6,47 @@ import { collection, onSnapshot, query, getDocs, where } from "firebase/firestor
 import RecipeForm from "../components/RecipeForm.jsx";
 import RecipeCard from "../components/RecipeCard.jsx";
 import Grid from '@mui/material/Unstable_Grid2';
-import { Paper } from '@mui/material';
+import { Paper, Button } from '@mui/material';
 
 const Recipes = () => {
+
+  const [user, loading, error] = useAuthState(auth);
+  const [name, setName] = useState("");
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (loading) return;
+    if (!user) return navigate("/");
+    // fetchUserName();
+  }, [user, loading]);
+
+  // const fetchUserName = async () => {
+  //   try {
+  //     const q = query(collection(db, "users"), where("uid", "==", user?.uid));
+  //     const doc = await getDocs(q);
+  //     const data = doc.docs[0].data();
+  //     setName(data.firstName + " " + data.lastName)
+  //   } catch (err) {
+  //     console.error(err);
+  //     alert("An error occurred while fetching user data.");
+  //   }
+  // };
 
   const collectionName = "recipes";
   const collectionId = collection(db, collectionName);
 
   const [recipes, setRecipes] = useState([]);
 
-  useEffect(() => {
-    onSnapshot(collectionId, snapshot => {
-      setRecipes(snapshot.docs.map(doc => {
-        return {
-          id: doc.id,
-          ...doc.data()
-        }
-      }))
-    })
-  }, []);
+  // useEffect(() => {
+  //   onSnapshot(collectionId, snapshot => {
+  //     setRecipes(snapshot.docs.map(doc => {
+  //       return {
+  //         id: doc.id,
+  //         ...doc.data()
+  //       }
+  //     }))
+  //   })
+  // }, []);
 
   recipes.sort((a, b) => {
     console.log("first check", +b.liked - +a.liked)
@@ -35,6 +57,10 @@ const Recipes = () => {
 
   return (
     <Paper style={{ padding: 20 }}>
+      <div>
+        {user && <p>Logged in as {user.email}</p>}
+        <Button onClick={logout}>Logout</Button>
+      </div>
       <RecipeForm />
       <Grid container spacing={3} justifyContent="flex-start" alignItems="flex-start">
         {recipes.map((recipe, index) => (

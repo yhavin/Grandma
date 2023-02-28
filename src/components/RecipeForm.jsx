@@ -1,22 +1,30 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { db } from "../firebase.config.js";
+import { db, auth } from "../firebase.config.js";
 import { collection, addDoc } from "firebase/firestore";
 import RecipeFormTextInput from "./RecipeFormTextInput.jsx";
 import RecipeFormSelectInput from "./RecipeFormSelectInput.jsx";
 import RecipeFormArrayInput from "./RecipeFormArrayInput.jsx";
 import { Button } from "@material-ui/core";
 import { Alert, Dialog, DialogActions, DialogContent, DialogTitle, Stack } from '@mui/material/';
+import { onAuthStateChanged } from "firebase/auth";
 
 const defaultRecipe = {
   title: "",
   mealType: "",
   ingredients: [{ "name": "" }],
   steps: [{ "description": "" }],
-  liked: false
+  liked: false,
+  uid: ""
 };
 
 export const RecipeForm = () => {
+
+  const user = auth.currentUser;
+  let uid;
+  if (user) {
+    uid = user.uid;
+  }
 
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [open, setOpen] = useState(false);
@@ -37,7 +45,7 @@ export const RecipeForm = () => {
     const cleanedIngredients = data.ingredients.filter(ingredient => ingredient.name !== "");
     const cleanedSteps = data.steps.filter(step => step.description !== "");
     const date = new Date(); 
-    const cleanedData = {...data, ingredients: cleanedIngredients, steps: cleanedSteps, date: date};
+    const cleanedData = {...data, ingredients: cleanedIngredients, steps: cleanedSteps, date: date, uid: uid};
     return cleanedData;
   };
   

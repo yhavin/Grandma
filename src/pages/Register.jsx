@@ -11,7 +11,7 @@ const Register = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [user, loading, error] = useAuthState(auth);
-  const history = useNavigate();
+  const navigate = useNavigate();
 
   const register = () => {
     if (!firstName || !lastName) alert("Please complete your name.");
@@ -20,7 +20,7 @@ const Register = () => {
 
   useEffect(() => {
     if (loading) return;
-    if (user) history.replace("/recipes");
+    if (user) navigate("/recipes");
   }, [user, loading]);
 
   return (
@@ -46,7 +46,7 @@ const Register = () => {
             placeholder="Email"
           />
           <TextField
-            type="text"
+            type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Password"

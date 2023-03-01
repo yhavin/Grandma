@@ -5,6 +5,7 @@ import { db, auth, logout } from "../firebase.config.js";
 import { collection, onSnapshot, query, where } from "firebase/firestore";
 import RecipeForm from "../components/RecipeForm.jsx";
 import RecipeCard from "../components/RecipeCard.jsx";
+import PrimaryAppBar from "../components/PrimaryAppBar.jsx";
 import Grid from '@mui/material/Unstable_Grid2';
 import { Paper, Button , Stack, Typography } from '@mui/material';
 
@@ -17,6 +18,25 @@ const Recipes = () => {
   const collectionId = collection(db, collectionName);
 
   const [recipes, setRecipes] = useState([]);
+
+  const [open, setOpen] = useState(false);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const filterData = (query, data) => {
+    if (!query) {
+      return data;
+    } else {
+      console.log(query);
+      data.map((doc) => console.log(doc.title.toLowerCase()))
+      return data.filter((doc) => doc.title.toLowerCase().includes(query));
+    }
+  }
+
+  const [searchQuery, setSearchQuery] = useState("");
+  const filteredData = filterData(searchQuery, recipes);
 
   useEffect(() => {
     if (loading) return;
@@ -48,14 +68,22 @@ const Recipes = () => {
 
   return (
     <div>
+      <PrimaryAppBar handleOpen={handleOpen} setSearchQuery={setSearchQuery} />
       <Stack direction="row" spacing={2}>
         {user && <Typography style={{ width: "auto" }}>Logged in as {user.email}</Typography>}
-        <Button size="small" variant="contained" onClick={logout}>Logout</Button>
+        <Button size="small" onClick={logout}>Logout</Button>
       </Stack>
       <Paper style={{ padding: 20 }}>
-        <RecipeForm uid={user ? user.uid: null}/>
+        <RecipeForm open={open} setOpen={setOpen} uid={user ? user.uid: null} author={user ? user.email: null}/>
+        {filteredData.length === 0 && (
+          <div>
+            <Typography variant="button">No recipes found</Typography>
+            <br />
+            <br />
+         </div>
+        )}
         <Grid container spacing={3} justifyContent="flex-start" alignItems="flex-start">
-          {recipes.map((recipe, index) => (
+          {filteredData.map((recipe, index) => (
             <Grid item key={index} xs={12} md={3}>
               <RecipeCard
                 title={recipe.title}
@@ -65,6 +93,7 @@ const Recipes = () => {
                 date={recipe.date}
                 liked={recipe.liked}
                 id={recipe.id}
+                author={user ? user.email: null}
                 collection={collectionName}
               />
             </Grid>

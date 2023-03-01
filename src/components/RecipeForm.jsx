@@ -17,14 +17,9 @@ const defaultRecipe = {
   uid: ""
 };
 
-export const RecipeForm = ({ uid }) => {
+export const RecipeForm = ({ open, setOpen, uid, author }) => {
 
   const [submitSuccess, setSubmitSuccess] = useState(false);
-  const [open, setOpen] = useState(false);
-
-  const handleOpen = () => {
-    setOpen(true);
-  };
 
   const handleClose = () => {
     reset(defaultRecipe);
@@ -38,7 +33,7 @@ export const RecipeForm = ({ uid }) => {
     const cleanedIngredients = data.ingredients.filter(ingredient => ingredient.name !== "");
     const cleanedSteps = data.steps.filter(step => step.description !== "");
     const date = new Date(); 
-    const cleanedData = {...data, ingredients: cleanedIngredients, steps: cleanedSteps, date: date, uid: uid};
+    const cleanedData = {...data, ingredients: cleanedIngredients, steps: cleanedSteps, date: date, uid: uid, author: author};
     return cleanedData;
   };
   
@@ -58,7 +53,6 @@ export const RecipeForm = ({ uid }) => {
 
   return (
     <div>
-      <Button variant="outlined" onClick={handleOpen}>Add new recipe</Button>
       <Dialog open={open} onClose={handleClose} fullWidth>
         <DialogTitle>New recipe</DialogTitle>
         <DialogContent dividers>

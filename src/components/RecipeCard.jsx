@@ -8,8 +8,9 @@ import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import EditIcon from '@mui/icons-material/Edit';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
+import Chip from '@mui/material/Chip';
 
-const RecipeCard = ({ title, mealType, ingredients, steps, date, liked, id, collection }) => {
+const RecipeCard = ({ title, mealType, ingredients, steps, date, liked, id, author, collection }) => {
 
   const [deleteSuccess, setDeleteSuccess] = useState(false);
   const [recipeOpen, setRecipeOpen] = useState(false);
@@ -49,9 +50,9 @@ const RecipeCard = ({ title, mealType, ingredients, steps, date, liked, id, coll
     }, 1200);
   }
 
-  const capitaliseWord = (string) => {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-  };
+  // const capitaliseWord = (string) => {
+  //   return string.charAt(0).toUpperCase() + string.slice(1);
+  // };
   
   return (
     <div>
@@ -59,7 +60,9 @@ const RecipeCard = ({ title, mealType, ingredients, steps, date, liked, id, coll
         <CardActionArea onClick={handleRecipeOpen}>
           <CardContent>
             <Typography variant="h5">{title}</Typography>
-            <Typography variant="subtitle1" color="textSecondary">{capitaliseWord(mealType)}</Typography>
+            <br />
+            <Chip size="small" label={mealType.toUpperCase()} style={{ borderRadius: "5px" }} />
+            <br />
             <br />
             <Typography variant="body2">
               {ingredients.length + " ingredient" + (ingredients.length !== 1 ? "s" : "")}
@@ -88,6 +91,9 @@ const RecipeCard = ({ title, mealType, ingredients, steps, date, liked, id, coll
           ) : null}
           </DialogTitle>
         <DialogContent dividers>
+          <Chip size="small" label={mealType.toUpperCase()} style={{ borderRadius: "5px" }} />
+          <br />
+          <br />
           <Typography variant="button">Ingredients</Typography>
           <List sx={{ listStyleType: "disc", pl: 4 }}>
             {ingredients.map((item, index) => (
@@ -106,6 +112,9 @@ const RecipeCard = ({ title, mealType, ingredients, steps, date, liked, id, coll
           </List>
           <Typography variant="subtitle1" color="textSecondary">
             {"Added: " + date.toDate().toLocaleString("en-US", { year: "numeric", month: "long", day: "numeric" })}
+          </Typography>
+          <Typography variant="subtitle1" color="textSecondary">
+            {"Author: " + author}
           </Typography>
         </DialogContent>
         <DialogActions>

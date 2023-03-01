@@ -48,9 +48,9 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 const PrimaryAppBar = ({ handleOpen, setSearchQuery })  => {
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar style={{ borderRadius: "5px", margin: "auto" }}>
-        <Toolbar>
+    <Box>
+      <AppBar sx={{ borderRadius: "5px" }}>
+        <Toolbar sx={{ mx: { xs: "0px", lg: "320px" } }}>
           <IconButton size="large" edge="start" color="inherit" onClick={handleOpen}>
             <AddIcon />
           </IconButton>

@@ -70,7 +70,7 @@ const Recipes = () => {
     <Box sx={{ mx: { xs: "0px", lg: "320px" } }}>
       <PrimaryAppBar handleOpen={handleOpen} setSearchQuery={setSearchQuery} />
       <Stack direction="row" spacing={2}>
-        {user && <Typography style={{ width: "auto" }}>Logged in as {user.email}</Typography>}
+        {user && <Typography style={{ width: "auto", display: "flex", alignItems: "center" }}>Logged in as {user.email}</Typography>}
         <Button size="small" onClick={logout}>Logout</Button>
       </Stack>
       <Paper style={{ padding: 20 }}>

@@ -2,9 +2,9 @@ html * {
   font-family: Roboto
 }
 
-@media screen and (min-width: 800px) {
+/* @media screen and (min-width: 800px) {
   body {
     margin: auto;
     width: 60%
   }
-}
+} */

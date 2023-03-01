@@ -1,7 +1,6 @@
 import React from "react";
 import { styled, alpha } from '@mui/material/styles';
-import SearchBar from "./SearchBar.jsx";
-import { AppBar, Toolbar, IconButton, InputBase, Typography } from "@mui/material/";
+import { AppBar, Box, Toolbar, IconButton, InputBase, Typography } from "@mui/material/";
 import AddIcon from '@mui/icons-material/Add';
 import SearchIcon from '@mui/icons-material/Search';
 
@@ -49,22 +48,23 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 const PrimaryAppBar = ({ handleOpen, setSearchQuery })  => {
   return (
-    <AppBar position="sticky" style={{ borderRadius: "5px" }}>
-      <Toolbar>
-        <IconButton size="large" edge="start" color="inherit" onClick={handleOpen}>
-          <AddIcon />
-        </IconButton>
-        <Typography variant="h6">Recipes</Typography>
-        <Search>
-          <SearchIconWrapper>
-            <SearchIcon />
-          </SearchIconWrapper>
-          <StyledInputBase placeholder="Search" onInput={(e) => setSearchQuery(e.target.value.toLowerCase())} />
-        </Search>
-        {/* <SearchBar setSearchQuery={setSearchQuery}/> */}
-      </Toolbar>
-    </AppBar>
-
+    <Box sx={{ flexGrow: 1 }}>
+      <AppBar style={{ borderRadius: "5px", margin: "auto" }}>
+        <Toolbar>
+          <IconButton size="large" edge="start" color="inherit" onClick={handleOpen}>
+            <AddIcon />
+          </IconButton>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}>Recipes</Typography>
+          <Search>
+            <SearchIconWrapper>
+              <SearchIcon />
+            </SearchIconWrapper>
+            <StyledInputBase placeholder="Search" onInput={(e) => setSearchQuery(e.target.value.toLowerCase())} />
+          </Search>
+        </Toolbar>
+      </AppBar>
+      <Toolbar />
+    </Box>
   )
 }
 

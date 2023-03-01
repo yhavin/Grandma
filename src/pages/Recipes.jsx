@@ -7,7 +7,7 @@ import RecipeForm from "../components/RecipeForm.jsx";
 import RecipeCard from "../components/RecipeCard.jsx";
 import PrimaryAppBar from "../components/PrimaryAppBar.jsx";
 import Grid from '@mui/material/Unstable_Grid2';
-import { Paper, Button , Stack, Typography } from '@mui/material';
+import { Paper, Box, Button , Stack, Typography } from '@mui/material';
 
 const Recipes = () => {
 
@@ -67,7 +67,7 @@ const Recipes = () => {
   })
 
   return (
-    <div>
+    <Box sx={{ mx: { xs: "0px", lg: "320px" } }}>
       <PrimaryAppBar handleOpen={handleOpen} setSearchQuery={setSearchQuery} />
       <Stack direction="row" spacing={2}>
         {user && <Typography style={{ width: "auto" }}>Logged in as {user.email}</Typography>}
@@ -100,7 +100,7 @@ const Recipes = () => {
           ))}
         </Grid>
       </Paper>
-    </div>
+    </Box>
   );
 };
 

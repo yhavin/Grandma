@@ -29,29 +29,37 @@ const Register = () => {
         <Stack direction={{ xs: "column" }} spacing={{ xs: 2 }}>
           <TextField
             type="text"
+            variant="outlined"
+            size="small"
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
             placeholder="First name"
           />
           <TextField
             type="text"
+            variant="outlined"
+            size="small"
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
             placeholder="Last name"
           />
           <TextField
             type="text"
+            variant="outlined"
+            size="small"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Email"
           />
           <TextField
             type="password"
+            variant="outlined"
+            size="small"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Password"
           />
-          <Button onClick={register}>Register</Button>
+          <Button variant="contained" color="primary" onClick={register}>Register</Button>
         </Stack>
       </div>
       <div>

@@ -39,7 +39,7 @@ const Login = () => {
         </Stack>
         <br />
       <Stack spacing={1}>
-        <Button size="small" variant="outlined" component={Link} to="/reset">Forgot password?</Button>
+        <Button size="small" variant="outlined" component={Link} to="/reset">Forgot password</Button>
         <Button size="small" variant="outlined" component={Link} to="/register">Create an account</Button>
       </Stack>
     </div>

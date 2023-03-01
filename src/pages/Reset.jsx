@@ -20,11 +20,13 @@ const Reset = ()  => {
       <Stack direction={{ xs: "column" }} spacing={{ xs: 2 }}>
         <TextField
           type="text"
+          variant="outlined"
+          size="small"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="Email"
         />
-        <Button onClick={() => sendPasswordReset(email)}>Send reset email</Button>
+        <Button variant="contained" color="primary" onClick={() => sendPasswordReset(email)}>Send reset email</Button>
       </Stack>
       <div>
         <Link to="/register">Don't have an account?</Link>

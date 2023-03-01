@@ -32,8 +32,7 @@ export const RecipeForm = ({ open, setOpen, uid, author }) => {
   const cleanSubmission = data => {
     const cleanedIngredients = data.ingredients.filter(ingredient => ingredient.name !== "");
     const cleanedSteps = data.steps.filter(step => step.description !== "");
-    const date = new Date(); 
-    const cleanedData = {...data, ingredients: cleanedIngredients, steps: cleanedSteps, date: date, uid: uid, author: author};
+    const cleanedData = {...data, ingredients: cleanedIngredients, steps: cleanedSteps, date: new Date(), uid: uid, author: author};
     return cleanedData;
   };
   

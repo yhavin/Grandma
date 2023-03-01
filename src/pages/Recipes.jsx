@@ -29,9 +29,10 @@ const Recipes = () => {
     if (!query) {
       return data;
     } else {
-      console.log(query);
-      data.map((doc) => console.log(doc.title.toLowerCase()))
-      return data.filter((doc) => doc.title.toLowerCase().includes(query));
+      return data.filter((doc) => (
+        doc.title.toLowerCase().includes(query)
+        || doc.mealType.toLowerCase().includes(query)
+      ));
     }
   }
 

@@ -1,6 +1,6 @@
 import React from "react";
 import './App.css';
-import { HashRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./pages/Layout";
 import Recipes from "./pages/Recipes";
 import Login from "./pages/Login";
@@ -26,14 +26,14 @@ export const theme = createTheme({
 const App = () => {
   return (
     <ThemeProvider theme={theme}>
-      <HashRouter basename="/">
+      <BrowserRouter basename="/public">
         <Routes>
           <Route exact path= "/" element={<Login />} />
           <Route exact path="/recipes" element={<Recipes />} />
           <Route exact path="/register" element={<Register />} />
           <Route exact path="/reset" element={<Reset />} />
         </Routes>
-      </HashRouter>
+      </BrowserRouter>
     </ThemeProvider>
 
   );

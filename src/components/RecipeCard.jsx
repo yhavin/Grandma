@@ -6,6 +6,7 @@ import { Button, Dialog, DialogTitle, DialogActions, Typography } from "@materia
 import CloseIcon from '@mui/icons-material/Close';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import EditIcon from '@mui/icons-material/Edit';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 import Chip from '@mui/material/Chip';
@@ -73,7 +74,7 @@ const RecipeCard = ({ title, mealType, ingredients, steps, date, liked, id, auth
           </CardContent>
         </CardActionArea>
         <CardActions>
-          <IconButton size="small" color={liked ? "error" : ""} onClick={() => handleLike(id, liked)}><FavoriteIcon /></IconButton>
+          <IconButton size="small" color={liked ? "error" : ""} onClick={() => handleLike(id, liked)}>{liked ? <FavoriteIcon /> : <FavoriteBorderIcon />}</IconButton>
           <IconButton size="small"><ShareIcon /></IconButton>
         </CardActions>
       </Card>
@@ -118,7 +119,7 @@ const RecipeCard = ({ title, mealType, ingredients, steps, date, liked, id, auth
           </Typography>
         </DialogContent>
         <DialogActions>
-          <IconButton size="small" color={liked ? "error" : ""} onClick={() => handleLike(id, liked)}><FavoriteIcon /></IconButton>
+          <IconButton size="small" color={liked ? "error" : ""} onClick={() => handleLike(id, liked)}>{liked ? <FavoriteIcon /> : <FavoriteBorderIcon />}</IconButton>
           <IconButton size="small"><ShareIcon /></IconButton>
           <Button variant="outlined" style={{ color: "grey", borderColor: "grey" }} startIcon={<EditIcon />}>Edit</Button>
           <Button variant="outlined" style={{ color: "#d32f2f", borderColor: "#d32f2f" }} startIcon={<DeleteOutlineIcon />} onClick={() => setConfirmOpen(true)}>Delete</Button>

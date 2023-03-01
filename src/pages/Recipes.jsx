@@ -6,7 +6,7 @@ import { collection, onSnapshot, query, where } from "firebase/firestore";
 import RecipeForm from "../components/RecipeForm.jsx";
 import RecipeCard from "../components/RecipeCard.jsx";
 import Grid from '@mui/material/Unstable_Grid2';
-import { Paper, Button } from '@mui/material';
+import { Paper, Button , Stack, Typography } from '@mui/material';
 
 const Recipes = () => {
 
@@ -47,29 +47,31 @@ const Recipes = () => {
   })
 
   return (
-    <Paper style={{ padding: 20 }}>
-      <div>
-        {user && <p>Logged in as {user.email}</p>}
-        <Button onClick={logout}>Logout</Button>
-      </div>
-      <RecipeForm uid={user ? user.uid: null}/>
-      <Grid container spacing={3} justifyContent="flex-start" alignItems="flex-start">
-        {recipes.map((recipe, index) => (
-          <Grid item key={index} xs={12} md={3}>
-            <RecipeCard
-              title={recipe.title}
-              mealType={recipe.mealType}
-              ingredients={recipe.ingredients}
-              steps={recipe.steps}
-              date={recipe.date}
-              liked={recipe.liked}
-              id={recipe.id}
-              collection={collectionName}
-            />
-          </Grid>
-        ))}
-      </Grid>
-    </Paper>
+    <div>
+      <Stack direction="row" spacing={2}>
+        {user && <Typography style={{ width: "auto" }}>Logged in as {user.email}</Typography>}
+        <Button size="small" variant="contained" onClick={logout}>Logout</Button>
+      </Stack>
+      <Paper style={{ padding: 20 }}>
+        <RecipeForm uid={user ? user.uid: null}/>
+        <Grid container spacing={3} justifyContent="flex-start" alignItems="flex-start">
+          {recipes.map((recipe, index) => (
+            <Grid item key={index} xs={12} md={3}>
+              <RecipeCard
+                title={recipe.title}
+                mealType={recipe.mealType}
+                ingredients={recipe.ingredients}
+                steps={recipe.steps}
+                date={recipe.date}
+                liked={recipe.liked}
+                id={recipe.id}
+                collection={collectionName}
+              />
+            </Grid>
+          ))}
+        </Grid>
+      </Paper>
+    </div>
   );
 };
 

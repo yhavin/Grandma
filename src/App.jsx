@@ -28,12 +28,10 @@ const App = () => {
     <ThemeProvider theme={theme}>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Layout />} >
-            <Route index element={<Login />} />
-            <Route path="recipes" element={<Recipes />} />
-            <Route path="register" element={<Register />} />
-            <Route path="reset" element={<Reset />} />
-          </Route>
+          <Route exact path= "/" element={<Login />} />
+          <Route exact path="/recipes" element={<Recipes />} />
+          <Route exact path="/register" element={<Register />} />
+          <Route exact path="/reset" element={<Reset />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>

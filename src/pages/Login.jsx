@@ -18,29 +18,30 @@ const Login = () => {
 
   return (
     <div>
-      <div>
         <Stack direction={{ xs: "column" }} spacing={{ xs: 2 }}>
           <TextField 
             type="text"
+            variant="outlined"
+            size="small"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Email"
           />
           <TextField 
             type="password"
+            variant="outlined"
+            size="small"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Password"
           />
-          <Button type="submit" onClick={() => loginWithEmailAndPassword(email, password)}>Login</Button>
+          <Button variant="contained" color="primary" onClick={() => loginWithEmailAndPassword(email, password)}>Login</Button>
         </Stack>
-      </div>
-      <div>
-        <Link to="/reset">Forgot password?</Link>
-      </div>
-      <div>
-        <Link to="/register">Create an account</Link>
-      </div>
+        <br />
+      <Stack spacing={1}>
+        <Button size="small" variant="outlined" component={Link} to="/reset">Forgot password?</Button>
+        <Button size="small" variant="outlined" component={Link} to="/register">Create an account</Button>
+      </Stack>
     </div>
   )
 };

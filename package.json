@@ -2,7 +2,7 @@
   "name": "grandma",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://yhavin.github.io/grandma/public",
+  "homepage": "https://yhavin.github.io/grandma",
   "dependencies": {
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
@@ -32,8 +32,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "predeploy" : "npm run build",
-    "deploy" : "gh-pages -b main -d build"
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -b main -d build"
   },
   "eslintConfig": {
     "extends": [

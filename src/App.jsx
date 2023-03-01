@@ -26,7 +26,7 @@ export const theme = createTheme({
 const App = () => {
   return (
     <ThemeProvider theme={theme}>
-      <HashRouter>
+      <HashRouter basename="/">
         <Routes>
           <Route exact path= "/" element={<Login />} />
           <Route exact path="/recipes" element={<Recipes />} />

@@ -61,9 +61,10 @@ const Register = () => {
           />
           <Button variant="contained" color="primary" onClick={register}>Register</Button>
         </Stack>
+        <br />
       </div>
       <div>
-        <Link to="/">Already have an account?</Link>
+        <Link to="/" style={{ textDecoration: "none" }}>Already have a Grandma account?</Link>
       </div>
     </div>
   )

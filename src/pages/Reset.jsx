@@ -28,8 +28,9 @@ const Reset = ()  => {
         />
         <Button variant="contained" color="primary" onClick={() => sendPasswordReset(email)}>Send reset email</Button>
       </Stack>
+      <br />
       <div>
-        <Link to="/register">Don't have an account?</Link>
+        <Link to="/register" style={{ textDecoration: "none" }}>Don't have an account?</Link>
       </div>
     </div>
   )

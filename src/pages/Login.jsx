@@ -39,8 +39,10 @@ const Login = () => {
         </Stack>
         <br />
       <Stack spacing={1}>
-        <Button size="small" variant="outlined" component={Link} to="/reset">Forgot password</Button>
-        <Button size="small" variant="outlined" component={Link} to="/register">Create an account</Button>
+        <Link to="/reset" style={{ textDecoration: "none" }}>Forgotten your email or password?</Link>
+        <Link to="/register" style={{ textDecoration: "none" }}>Create Grandma account</Link>
+        {/* <Button size="small" variant="outlined" component={Link} to="/reset">Forgot password</Button>
+        <Button size="small" variant="outlined" component={Link} to="/register">Create an account</Button> */}
       </Stack>
     </div>
   )

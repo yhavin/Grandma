@@ -16,6 +16,12 @@ const Login = ({ loginOpen, setLoginOpen, setResetOpen, setRegisterOpen }) => {
     if (user) navigate("/recipes");
   }, [user, loading]);
 
+  const handleEnter = (e) => {
+    if (e.key === "Enter") {
+      loginWithEmailAndPassword(email, password);
+     } else { return };
+  };
+
   return (
     <Dialog open={loginOpen} onClose={() => setLoginOpen(false)} fullWidth>
       <DialogTitle>Log in to Grandma</DialogTitle>
@@ -36,8 +42,9 @@ const Login = ({ loginOpen, setLoginOpen, setResetOpen, setRegisterOpen }) => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Password"
+              onKeyDown={(e) =>handleEnter(e)}
             />
-            <Button variant="contained" style={{color: "white", backgroundColor: "#1976d2"}} onClick={() => loginWithEmailAndPassword(email, password)}>Login</Button>
+            <Button variant="contained" style={{color: "white", backgroundColor: "#1976d2"}} onClick={() => loginWithEmailAndPassword(email, password)}>Log in</Button>
           </Stack>
             <br />
           <Stack spacing={1}>

@@ -51,24 +51,22 @@ export const RecipeForm = ({ open, setOpen, uid, author }) => {
   };
 
   return (
-    <div>
-      <Dialog open={open} onClose={handleClose} fullWidth>
-        <DialogTitle>New recipe</DialogTitle>
-        <DialogContent dividers>
-          <Stack direction={{ xs: "column" }} spacing={{ xs: 2 }}>
-            <RecipeFormTextInput name="title" control={control} label="Title" />
-            <RecipeFormSelectInput name="mealType" control={control} label="Meal type" />
-            <RecipeFormArrayInput name="ingredients" control={control} label="Ingredients" childProp="name" watch={watch} />
-            <RecipeFormArrayInput name="steps" control={control} label="Steps" childProp="description" watch={watch} />
-          </Stack>
-        </DialogContent>
-          {!submitSuccess && <DialogActions>
-            <Button type="button" variant="outlined" onClick={handleClose}>Cancel</Button>
-            <Button type="submit" color="primary" variant="contained" onClick={handleSubmit(onSubmit)}>Submit</Button>
-          </DialogActions>}
-          {submitSuccess && <Alert severity="success">Recipe added.</Alert>}
-      </Dialog>
-    </div>
+    <Dialog open={open} onClose={handleClose} fullWidth>
+      <DialogTitle>New recipe</DialogTitle>
+      <DialogContent dividers>
+        <Stack direction={{ xs: "column" }} spacing={{ xs: 2 }}>
+          <RecipeFormTextInput name="title" control={control} label="Title" />
+          <RecipeFormSelectInput name="mealType" control={control} label="Meal type" />
+          <RecipeFormArrayInput name="ingredients" control={control} label="Ingredients" childProp="name" watch={watch} />
+          <RecipeFormArrayInput name="steps" control={control} label="Steps" childProp="description" watch={watch} />
+        </Stack>
+      </DialogContent>
+        {!submitSuccess && <DialogActions>
+          <Button type="button" variant="outlined" onClick={handleClose}>Cancel</Button>
+          <Button type="submit" style={{color: "white", backgroundColor: "#1976d2"}} variant="contained" onClick={handleSubmit(onSubmit)}>Submit</Button>
+        </DialogActions>}
+        {submitSuccess && <Alert severity="success">Recipe added.</Alert>}
+    </Dialog>
   );
 };
 

@@ -23,6 +23,12 @@ const Register = ({ registerOpen, setRegisterOpen, setLoginOpen }) => {
     if (user) navigate("/recipes");
   }, [user, loading]);
 
+  const handleEnter = (e) => {
+    if (e.key === "Enter") {
+      register();
+     } else { return };
+  };
+
   return (
     <Dialog open={registerOpen} onClose={() => setRegisterOpen(false)} fullWidth>
       <DialogTitle>Create a Grandma account</DialogTitle>
@@ -60,6 +66,7 @@ const Register = ({ registerOpen, setRegisterOpen, setLoginOpen }) => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Password"
+            onKeyDown={(e) =>handleEnter(e)}
           />
           <Button variant="contained" style={{color: "white", backgroundColor: "#1976d2"}} onClick={register}>Register</Button>
         </Stack>

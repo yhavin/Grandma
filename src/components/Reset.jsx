@@ -15,6 +15,12 @@ const Reset = ({ resetOpen, setResetOpen, setRegisterOpen })  => {
     if (user) navigate("/recipes");
   }, [user, loading]);
 
+  const handleEnter = (e) => {
+    if (e.key === "Enter") {
+      sendPasswordReset(email);
+     } else { return };
+  };
+
   return (
     <Dialog open={resetOpen} onClose={() => setResetOpen(false)} fullWidth>
       <DialogTitle>Reset your password</DialogTitle>
@@ -27,6 +33,7 @@ const Reset = ({ resetOpen, setResetOpen, setRegisterOpen })  => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Email"
+            onKeyDown={(e) =>handleEnter(e)}
           />
           <Button variant="contained" style={{color: "white", backgroundColor: "#1976d2"}} onClick={() => sendPasswordReset(email)}>Send reset email</Button>
         </Stack>

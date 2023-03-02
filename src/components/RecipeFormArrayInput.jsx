@@ -21,7 +21,7 @@ const RecipeFormArrayInput = ({ name, control, label, childProp }) => {
   const handleAppend = (e) => {
     if (e.key === "Enter") {
       append({}, { shouldFocus: true, focusName: `${name}[${fields.length}].${childProp}` })
-    } else { return } ;
+    } else { return };
   };
 
   return (

@@ -72,7 +72,7 @@ const Recipes = () => {
       <PrimaryAppBar handleOpen={handleOpen} setSearchQuery={setSearchQuery} />
       <Stack direction="row" spacing={2}>
         {user && <Typography style={{ width: "auto", display: "flex", alignItems: "center" }}>Logged in as {user.email}</Typography>}
-        <Button size="small" onClick={logout}>Logout</Button>
+        <Button size="small" onClick={logout}>Log out</Button>
       </Stack>
       <Paper style={{ padding: 20 }}>
         <RecipeForm open={open} setOpen={setOpen} uid={user ? user.uid: null} author={user ? user.email: null}/>

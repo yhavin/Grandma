@@ -3,7 +3,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { Link, useNavigate } from "react-router-dom";
 import { auth, registerWithEmailAndPassword } from "../firebase.config";
 import { TextField, Button } from "@material-ui/core";
-import { Stack } from '@mui/material/';
+import { Stack, Box, Paper } from '@mui/material/';
 
 const Register = () => {
   const [email, setEmail] = useState("");
@@ -24,8 +24,8 @@ const Register = () => {
   }, [user, loading]);
 
   return (
-    <div>
-      <div>
+    <Box sx={{ mx: { xs: "0px", sm: "225px", lg: "475px" }, my: { xs: "0px", sm: "225px" } }}>
+      <Paper style={{ padding: 20 }}>
         <Stack direction={{ xs: "column" }} spacing={{ xs: 2 }}>
           <TextField
             type="text"
@@ -55,18 +55,17 @@ const Register = () => {
             type="password"
             variant="outlined"
             size="small"
+            autoComplete="new-password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Password"
           />
-          <Button variant="contained" color="primary" onClick={register}>Register</Button>
+          <Button variant="contained" style={{color: "white", backgroundColor: "#1976d2"}} onClick={register}>Register</Button>
         </Stack>
         <br />
-      </div>
-      <div>
-        <Link to="/" style={{ textDecoration: "none" }}>Already have a Grandma account?</Link>
-      </div>
-    </div>
+        <Link className="ui-link" to="/">Already have a Grandma account?</Link>
+      </Paper>
+    </Box>
   )
 };
 

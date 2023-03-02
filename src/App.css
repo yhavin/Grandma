@@ -9,3 +9,15 @@ html * {
   }
 } */
 
+a.ui-link:visited {
+  color: #1976d2;
+}
+
+a.ui-link {
+  color: #1976d2;
+  text-decoration: none
+}
+
+a.ui-link:hover {
+  text-decoration: underline
+}

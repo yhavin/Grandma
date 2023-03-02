@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { auth, loginWithEmailAndPassword } from "../firebase.config";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { TextField, Button } from "@material-ui/core";
-import { Stack } from '@mui/material/';
+import { Stack, Box, Paper } from '@mui/material/';
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -17,7 +17,8 @@ const Login = () => {
   }, [user, loading]);
 
   return (
-    <div>
+    <Box sx={{ mx: { xs: "0px", sm: "225px", lg: "475px" }, my: { xs: "0px", sm: "225px" } }}>
+      <Paper style={{ padding: 20 }}>
         <Stack direction={{ xs: "column" }} spacing={{ xs: 2 }}>
           <TextField 
             type="text"
@@ -35,16 +36,15 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Password"
           />
-          <Button variant="contained" color="primary" onClick={() => loginWithEmailAndPassword(email, password)}>Login</Button>
+          <Button variant="contained" style={{color: "white", backgroundColor: "#1976d2"}} onClick={() => loginWithEmailAndPassword(email, password)}>Login</Button>
         </Stack>
-        <br />
-      <Stack spacing={1}>
-        <Link to="/reset" style={{ textDecoration: "none" }}>Forgotten your email or password?</Link>
-        <Link to="/register" style={{ textDecoration: "none" }}>Create Grandma account</Link>
-        {/* <Button size="small" variant="outlined" component={Link} to="/reset">Forgot password</Button>
-        <Button size="small" variant="outlined" component={Link} to="/register">Create an account</Button> */}
-      </Stack>
-    </div>
+          <br />
+        <Stack spacing={1}>
+          <Link className="ui-link" to="/reset">Forgotten your email or password?</Link>
+          <Link className="ui-link" to="/register">Create Grandma account</Link>
+        </Stack>
+      </Paper>
+    </Box>
   )
 };
 

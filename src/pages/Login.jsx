@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { auth, loginWithEmailAndPassword } from "../firebase.config";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { TextField, Button } from "@material-ui/core";
-import { Stack, Box, Paper } from '@mui/material/';
+import { Stack, Box, Paper, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material/';
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -16,9 +16,11 @@ const Login = () => {
     if (user) navigate("/recipes");
   }, [user, loading]);
 
+  const [open, setOpen] = useState(false);
+
   return (
     <Box sx={{ mx: { xs: "0px", sm: "225px", lg: "475px" }, my: { xs: "0px", sm: "225px" } }}>
-      <Paper style={{ padding: 20 }}>
+      <Paper style={{ padding: 20, borderRadius: "10px" }}>
         <Stack direction={{ xs: "column" }} spacing={{ xs: 2 }}>
           <TextField 
             type="text"

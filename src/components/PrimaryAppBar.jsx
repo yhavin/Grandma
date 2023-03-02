@@ -49,7 +49,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 const PrimaryAppBar = ({ handleOpen, setSearchQuery })  => {
   return (
     <Box>
-      <AppBar sx={{ borderRadius: { xs: "0px", md: "5px" } }}>
+      <AppBar elevation={0}>
         <Toolbar sx={{ mx: { xs: "0px", lg: "320px" } }}>
           <IconButton size="large" edge="start" color="inherit" onClick={handleOpen}>
             <AddIcon />

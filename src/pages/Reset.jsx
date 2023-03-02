@@ -17,7 +17,7 @@ const Reset = ()  => {
 
   return (
     <Box sx={{ mx: { xs: "0px", sm: "225px", lg: "475px" }, my: { xs: "0px", sm: "225px" } }}>
-      <Paper style={{ padding: 20 }}>
+      <Paper style={{ padding: 20, borderRadius: "10px" }} >
         <Stack direction={{ xs: "column" }} spacing={{ xs: 2 }}>
           <TextField
             type="text"

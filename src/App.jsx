@@ -1,11 +1,8 @@
 import React from "react";
 import './App.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-// import Layout from "./pages/Layout";
 import Recipes from "./pages/Recipes";
 import Splash from "./pages/Splash";
-// import Register from "./components/Register";
-// import Reset from "./components/Reset";
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 export const theme = createTheme({
@@ -30,8 +27,6 @@ const App = () => {
         <Routes>
           <Route exact path= "/" element={<Splash />} />
           <Route exact path="/recipes" element={<Recipes />} />
-          {/* <Route exact path="/register" element={<Register />} />
-          <Route exact path="/reset" element={<Reset />} /> */}
         </Routes>
       </BrowserRouter>
     </ThemeProvider>

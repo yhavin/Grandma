@@ -42,7 +42,7 @@ const Login = ({ loginOpen, setLoginOpen, setResetOpen, setRegisterOpen }) => {
             <br />
           <Stack spacing={1}>
             <Link style={{ cursor: "pointer" }} underline="hover" onClick={() => {setLoginOpen(false); setResetOpen(true)}}>Forgotten your email or password?</Link>
-            <Link style={{ cursor: "pointer" }} underline="hover" onClick={() => {setLoginOpen(false); setRegisterOpen(true)}}>Create Grandma account</Link>
+            <Link style={{ cursor: "pointer" }} underline="hover" onClick={() => {setLoginOpen(false); setRegisterOpen(true)}}>Create a Grandma account</Link>
           </Stack>
       </DialogContent>
     </Dialog>

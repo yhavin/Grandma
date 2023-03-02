@@ -49,6 +49,15 @@ const RecipeCard = ({ title, mealType, ingredients, steps, date, liked, id, auth
       handleRecipeClose(); 
       setDeleteSuccess(false);
     }, 1200);
+  };
+
+  const chipColor = (mealType) => {
+    switch (mealType) {
+      case "dinner": return "#faebe3";
+      case "lunch": return "#faf9e1";
+      case "breakfast": return "#e6fce8";
+      default: return "#e8e8e8";
+    }
   }
 
   // const capitaliseWord = (string) => {
@@ -62,7 +71,7 @@ const RecipeCard = ({ title, mealType, ingredients, steps, date, liked, id, auth
           <CardContent>
             <Typography variant="h5">{title}</Typography>
             <br />
-            <Chip size="small" label={mealType.toUpperCase()} style={{ borderRadius: "5px" }} />
+            <Chip size="small" label={mealType.toUpperCase()} style={{ borderRadius: "5px", backgroundColor: chipColor(mealType) }} />
             <br />
             <br />
             <Typography variant="body2">

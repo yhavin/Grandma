@@ -31,7 +31,7 @@ const Reset = ({ resetOpen, setResetOpen, setRegisterOpen })  => {
           <Button variant="contained" style={{color: "white", backgroundColor: "#1976d2"}} onClick={() => sendPasswordReset(email)}>Send reset email</Button>
         </Stack>
         <br />
-        <Link style={{ cursor: "pointer" }} underline="hover" onClick={() => {setResetOpen(false); setRegisterOpen(true)}}>Don't have an account?</Link>
+        <Link style={{ cursor: "pointer" }} underline="hover" onClick={() => {setResetOpen(false); setRegisterOpen(true)}}>Don't have a Grandma account?</Link>
       </DialogContent>
     </Dialog>
   )

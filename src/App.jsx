@@ -3,9 +3,9 @@ import './App.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 // import Layout from "./pages/Layout";
 import Recipes from "./pages/Recipes";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
-import Reset from "./pages/Reset";
+import Splash from "./pages/Splash";
+// import Register from "./components/Register";
+// import Reset from "./components/Reset";
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 export const theme = createTheme({
@@ -28,10 +28,10 @@ const App = () => {
     <ThemeProvider theme={theme}>
       <BrowserRouter>
         <Routes>
-          <Route exact path= "/" element={<Login />} />
+          <Route exact path= "/" element={<Splash />} />
           <Route exact path="/recipes" element={<Recipes />} />
-          <Route exact path="/register" element={<Register />} />
-          <Route exact path="/reset" element={<Reset />} />
+          {/* <Route exact path="/register" element={<Register />} />
+          <Route exact path="/reset" element={<Reset />} /> */}
         </Routes>
       </BrowserRouter>
     </ThemeProvider>

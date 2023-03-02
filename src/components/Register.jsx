@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { auth, registerWithEmailAndPassword } from "../firebase.config";
 import { TextField, Button } from "@material-ui/core";
-import { Stack, Box, Paper } from '@mui/material/';
+import { Stack, Dialog, DialogContent, DialogTitle, Link } from '@mui/material/';
 
-const Register = () => {
+const Register = ({ registerOpen, setRegisterOpen, setLoginOpen }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [firstName, setFirstName] = useState("");
@@ -24,8 +24,9 @@ const Register = () => {
   }, [user, loading]);
 
   return (
-    <Box sx={{ mx: { xs: "0px", sm: "225px", lg: "475px" }, my: { xs: "0px", sm: "225px" } }}>
-      <Paper style={{ padding: 20, borderRadius: "10px" }} elevation={16}>
+    <Dialog open={registerOpen} onClose={() => setRegisterOpen(false)} fullWidth>
+      <DialogTitle>Create a Grandma account</DialogTitle>
+      <DialogContent>
         <Stack direction={{ xs: "column" }} spacing={{ xs: 2 }}>
           <TextField
             type="text"
@@ -63,9 +64,9 @@ const Register = () => {
           <Button variant="contained" style={{color: "white", backgroundColor: "#1976d2"}} onClick={register}>Register</Button>
         </Stack>
         <br />
-        <Link className="ui-link" to="/">Already have a Grandma account?</Link>
-      </Paper>
-    </Box>
+        <Link style={{ cursor: "pointer" }} underline="hover" onClick={() => {setRegisterOpen(false); setLoginOpen(true)}}>Already have a Grandma account?</Link>
+      </DialogContent>
+    </Dialog>
   )
 };
 

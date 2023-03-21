@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import Login from "../components/Login.jsx";
 import Reset from "../components/Reset.jsx";
 import Register from "../components/Register.jsx";
-import { Box, Button, Typography, Stack, Skeleton } from "@mui/material/";
-import stew from "../public/stew.jpg";
+import { Button, Typography, Grid, Card, CardContent, CardActions } from "@mui/material/";
+import { CardMedia } from "@material-ui/core";
+import stewImg from "../stew.jpeg"
 
 const Splash = () => {
 
@@ -12,19 +13,22 @@ const Splash = () => {
   const [registerOpen, setRegisterOpen] = useState(false);
 
   return (
-    // <Box textAlign="center" sx={{ mx: { xs: "0px", sm: "225px", lg: "475px" }, my: { xs: "0px", sm: "180px" } }}>
-    <Box textAlign="center" sx={{ mx: { xs: "0%", sm: "15%", lg: "15%" }, my: { xs: "0%", sm: "15%" } }}>
-      <Stack spacing={1}>
-        <Box component="img" src={stew} alt="stew image" sx={{ height: 300, width: 300 }} />
-      </Stack>
-      <br />
-      <Typography variant="h2" style={{ color: "#1976d2", fontWeight: 500 }}>Grandma</Typography>
-      <br />
-      <Button variant="contained" style={{color: "white", backgroundColor: "#1976d2"}} onClick={() => setLoginOpen(true)}>Log in</Button> 
-      <Login loginOpen={loginOpen} setLoginOpen={setLoginOpen} setResetOpen={setResetOpen} setRegisterOpen={setRegisterOpen}/>
-      <Reset resetOpen={resetOpen} setResetOpen={setResetOpen} setRegisterOpen={setRegisterOpen} />
-      <Register registerOpen={registerOpen} setRegisterOpen={setRegisterOpen} setLoginOpen={setLoginOpen} />
-    </Box>
+    <Grid container spacing={0} direction="row" alignItems="center" justifyContent="center">
+      <Grid item>
+        <Card>
+          <CardMedia src={stewImg} component="img" title="stew" height="300" />
+          <CardContent>
+            <Typography variant="h2" style={{ color: "#1976d2", fontWeight: 500 }}>Grandma</Typography>
+          </CardContent>
+          <CardActions>
+            <Button variant="contained" style={{color: "white", backgroundColor: "#1976d2"}} onClick={() => setLoginOpen(true)}>Log in</Button>
+            <Login loginOpen={loginOpen} setLoginOpen={setLoginOpen} setResetOpen={setResetOpen} setRegisterOpen={setRegisterOpen}/>
+            <Reset resetOpen={resetOpen} setResetOpen={setResetOpen} setRegisterOpen={setRegisterOpen} />
+            <Register registerOpen={registerOpen} setRegisterOpen={setRegisterOpen} setLoginOpen={setLoginOpen} />
+          </CardActions>
+        </Card>
+      </Grid>
+    </Grid>
   )
 };
 

@@ -25,7 +25,7 @@ const App = () => {
     <ThemeProvider theme={theme}>
       <BrowserRouter>
         <Routes>
-          <Route exact path= "/" element={<Splash />} />
+          <Route index exact path= "/" element={<Splash />} />
           <Route exact path="/recipes" element={<Recipes />} />
         </Routes>
       </BrowserRouter>

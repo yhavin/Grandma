@@ -13,8 +13,8 @@ import Chip from '@mui/material/Chip';
 
 const RecipeCard = ({ title, mealType, ingredients, steps, date, liked, id, author, collection }) => {
 
-  const [deleteSuccess, setDeleteSuccess] = useState(false);
   const [recipeOpen, setRecipeOpen] = useState(false);
+  const [deleteSuccess, setDeleteSuccess] = useState(false);
 
   const handleRecipeOpen = () => {
     setRecipeOpen(true);
@@ -59,10 +59,6 @@ const RecipeCard = ({ title, mealType, ingredients, steps, date, liked, id, auth
       default: return "#e8e8e8";
     }
   }
-
-  // const capitaliseWord = (string) => {
-  //   return string.charAt(0).toUpperCase() + string.slice(1);
-  // };
   
   return (
     <div>

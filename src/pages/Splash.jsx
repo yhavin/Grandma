@@ -3,6 +3,7 @@ import Login from "../components/Login.jsx";
 import Reset from "../components/Reset.jsx";
 import Register from "../components/Register.jsx";
 import { Box, Button, Typography, Stack, Skeleton } from "@mui/material/";
+import stew from "../public/stew.jpg";
 
 const Splash = () => {
 
@@ -14,7 +15,7 @@ const Splash = () => {
     // <Box textAlign="center" sx={{ mx: { xs: "0px", sm: "225px", lg: "475px" }, my: { xs: "0px", sm: "180px" } }}>
     <Box textAlign="center" sx={{ mx: { xs: "0%", sm: "15%", lg: "15%" }, my: { xs: "0%", sm: "15%" } }}>
       <Stack spacing={1}>
-        <Box component="img" src="https://imgur.com/a/YlKbtJo" alt="stew image" sx={{ height: 300, width: 300 }} />
+        <Box component="img" src={stew} alt="stew image" sx={{ height: 300, width: 300 }} />
       </Stack>
       <br />
       <Typography variant="h2" style={{ color: "#1976d2", fontWeight: 500 }}>Grandma</Typography>

@@ -16,3 +16,6 @@ Can software developers be cooks too? I love cooking, and whenever I see a video
 - Click to "favourite" recipes with a red heart icon
 - Share your recipes with other users (coming soon)
 - Export your recipes to PDF for printing (coming soon)
+
+### Deployment
+You can view the Grandma app live here: https://grandma-f7eb8.web.app/
